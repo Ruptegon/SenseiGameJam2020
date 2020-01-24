@@ -25,5 +25,15 @@ public class Net : NetworkManager
             Debug.LogError("Application is neither a server or a client");
     }
 
-
+    new private void Start()
+    {
+        if(Net.IsServer)
+        {
+            base.StartServer();
+        }
+        else if(Net.IsClient)
+        {
+            base.Start();
+        }
+    }
 }

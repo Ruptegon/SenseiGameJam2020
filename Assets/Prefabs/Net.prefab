@@ -51,13 +51,13 @@ MonoBehaviour:
   serverTickRate: 60
   showDebugMessages: 0
   offlineScene: 
-  onlineScene: 
+  onlineScene: Online
   transport: {fileID: 73903804391569052}
-  networkAddress: localhost
+  networkAddress: 156.17.148.252
   maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 0}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
   buildMode: {fileID: 11400000, guid: 8d91d47b2fe959843a01b359702bcee6, type: 2}

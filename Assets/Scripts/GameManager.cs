@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     private WorldData worldData;
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         worldData = new WorldData();
 
         worldData.SizeX = 10;
