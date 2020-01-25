@@ -20,14 +20,14 @@ public class DungeonKeeper : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            Debug.Log("Mouse down 2!");
+            //Debug.Log("Mouse down 2!");
             if (toSpawn != null)
             {
                 var mousePos = Input.mousePosition;
                 mousePos.z = 13;
                 Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-                Debug.Log("Mouse pos = " + mousePos);
-                Debug.Log("World pos = " + worldPos);
+                //Debug.Log("Mouse pos = " + mousePos);
+                //Debug.Log("World pos = " + worldPos);
                 worldPos += new Vector3(0.5f, 0.5f, 0.5f);
                 if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x <= 11 && worldPos.z <= 40)
                 {
@@ -39,7 +39,7 @@ public class DungeonKeeper : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Mouse down!");
+        //Debug.Log("Mouse down!");
         var mousePos = Input.mousePosition;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x <= 11 && worldPos.z < 50) 
