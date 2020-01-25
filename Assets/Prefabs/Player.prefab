@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   localPositionSensitivity: 0.01
   localEulerAnglesSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -99,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a268603e04b4c46bcdbfcf750e8484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  moveSpeed: 8
+  turnSensitivity: 5
+  maxTurnSpeed: 150
 --- !u!1001 &6916826579940547502
 PrefabInstance:
   m_ObjectHideFlags: 0
