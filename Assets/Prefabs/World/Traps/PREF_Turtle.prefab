@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255750247803173440}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.027999997}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 7339609592519241166}
@@ -281,6 +281,16 @@ PrefabInstance:
       propertyPath: ShapeModule.radiusThickness
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2178656357794168387, guid: 44910d680524f3c4d86220605ac3846a,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178656357794168387, guid: 44910d680524f3c4d86220605ac3846a,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5295234057228443831, guid: 44910d680524f3c4d86220605ac3846a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,7 +304,7 @@ PrefabInstance:
     - target: {fileID: 5295234057228443831, guid: 44910d680524f3c4d86220605ac3846a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.236
+      value: -0.264
       objectReference: {fileID: 0}
     - target: {fileID: 5295234057228443831, guid: 44910d680524f3c4d86220605ac3846a,
         type: 3}
