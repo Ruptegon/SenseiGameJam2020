@@ -19,9 +19,9 @@ public class Fly : MonoBehaviour
     {
         time = ((float)GameManager.SyncTimer - previousTime);
         lifeTime += time;
-        Debug.Log("syncTime = " + (float)GameManager.SyncTimer);
-        Debug.Log("time = " + time);
-        Debug.Log("lifeTime = " + lifeTime);
+        //Debug.Log("syncTime = " + (float)GameManager.SyncTimer);
+        //Debug.Log("time = " + time);
+        //Debug.Log("lifeTime = " + lifeTime);
         transform.position += transform.forward * time;
         previousTime = (float)GameManager.SyncTimer;
         if (lifeTime >= 20) 
