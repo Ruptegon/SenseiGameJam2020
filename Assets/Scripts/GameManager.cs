@@ -8,19 +8,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static float SyncTimer => (float)Instance.syncTimer.TimeValue;
+    public static Builder Builder;
 
     private WorldData worldData = new WorldData(11, 50);
     private SyncTimer syncTimer = new SyncTimer();
-    private Builder builder;
+
 
     private void Awake()
     {
         Instance = this;
 
-        //DontDestroyOnLoad(gameObject);
-
-        builder = GetComponent<Builder>();
-        builder.Init(worldData);
+        Builder = GetComponent<Builder>();
+        Builder.Init(worldData);
 
         worldData.RegisterHandler();
         syncTimer.RegisterHandler();
@@ -32,9 +31,9 @@ public class GameManager : MonoBehaviour
         {
             BuildWorld();
 
-            builder.BuildObject(builder.Prefabs[0], 2, 2);
-            builder.BuildObject(builder.Prefabs[0], 3, 3);
-            builder.BuildObject(builder.Prefabs[0], 4, 4);
+            Builder.BuildObject(Builder.Prefabs[0], 2, 2);
+            Builder.BuildObject(Builder.Prefabs[0], 3, 3);
+            Builder.BuildObject(Builder.Prefabs[0], 4, 4);
 
         }
     }
@@ -46,11 +45,11 @@ public class GameManager : MonoBehaviour
 
     public void BuildWorld()
     {
-        if (!builder)
+        if (!Builder)
             Debug.LogError("Builder is not declared!");
         else
         {
-            builder.BuildWorld(worldData);
+            Builder.BuildWorld(worldData);
         }
     }
 
