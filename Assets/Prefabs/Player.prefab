@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  jumpAnimation: {fileID: 0}
+  animator: {fileID: 7697279223477903392}
 --- !u!136 &7014772377586772181
 CapsuleCollider:
   m_ObjectHideFlags: 0
