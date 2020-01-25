@@ -6,29 +6,28 @@ using UnityEngine;
 
 public class WorldData : MessageBase
 {
-    [Serializable]
-    public struct ObjectData
-    {
-        public int Id;
-        public int X;
-        public int Z;
-    }
-
-
     public int SizeX;
     public int SizeZ;
 
-    public List<ObjectData> ListOfObjects;
+    public int[,] Map;
 
     public WorldData()
     {
 
     }
 
-    public WorldData(int x, int z)
+    public WorldData(int sizeX, int sizeZ)
     {
-        SizeX = x;
-        SizeZ = z;
+        SizeX = sizeX;
+        SizeZ = sizeZ;
+        Map = new int[SizeX, SizeZ];
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int z = 0; z < SizeZ; z++)
+            {
+                Map[x, z] = -1;
+            }
+        }
     }
 
     public override void Deserialize(NetworkReader reader)
@@ -36,16 +35,15 @@ public class WorldData : MessageBase
         SizeX = reader.ReadInt32();
         SizeZ = reader.ReadInt32();
 
-        ListOfObjects.Clear();
-        var count = reader.ReadInt32();
-        for (int i = 0; i < count; i++)
+        Map = new int[SizeX, SizeZ];
+        for (int x = 0; x < SizeX; x++)
         {
-            var obj = new ObjectData();
-            obj.Id = reader.ReadInt32();
-            obj.X = reader.ReadInt32();
-            obj.Z = reader.ReadInt32();
-            ListOfObjects.Add(obj);
+            for (int z = 0; z < SizeZ; z++)
+            {
+                Map[x, z] = reader.ReadInt32();
+            }
         }
+
     }
 
     public override void Serialize(NetworkWriter writer)
@@ -53,24 +51,22 @@ public class WorldData : MessageBase
         writer.WriteInt32(SizeX);
         writer.WriteInt32(SizeZ);
 
-        var count = ListOfObjects.Count;
-        writer.WriteInt32(count);
-        for (int i = 0; i < count; i++)
+        for (int x = 0; x < SizeX; x++)
         {
-            var obj = ListOfObjects[i];
-            writer.WriteInt32(obj.Id);
-            writer.WriteInt32(obj.X);
-            writer.WriteInt32(obj.Z);
+            for (int z = 0; z < SizeZ; z++)
+            {
+                writer.WriteInt64(Map[x, z]);
+            }
         }
     }
 
     public void RegisterHandler()
     {
-        if(Net.IsServer)
+        if (Net.IsServer)
         {
-            
+
         }
-        if(Net.IsClient)
+        if (Net.IsClient)
         {
             if (!NetworkServer.active)
                 NetworkClient.RegisterHandler<WorldData>(OnWorldData);
@@ -83,8 +79,20 @@ public class WorldData : MessageBase
         GameManager.Instance.BuildWorld();
     }
 
-    internal void AddObject(int prefabId, Vector3 position)
+    public bool AddObject(int prefabId, int positionX, int positionZ)
     {
+        if (Map[positionX, positionZ] == -1)
+            return false;
 
+        Map[positionX, positionZ] = prefabId;
+        return true;
+    }
+
+    public bool IsEmpty(int positionX, int positionZ)
+    {
+        if (Map[positionX, positionZ] == -1)
+            return true;
+
+        return false;
     }
 }
