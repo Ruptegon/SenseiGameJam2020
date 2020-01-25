@@ -22,8 +22,11 @@ public class InitUIController : MonoBehaviour
     {
         var address = ipAddressInputField.text;
         var playerName = playerNameInputField.text;
-        if(!string.IsNullOrEmpty(address))
+
+        if (!string.IsNullOrEmpty(address))
             Net.instance.PlayGame(address);
-        Player.PlayerName = playerName;
+
+        if (!string.IsNullOrEmpty(playerName))
+            Player.PlayerName = playerName;
     }
 }
