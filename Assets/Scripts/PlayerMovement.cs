@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    [SerializeField] private Animation jumpAnimation;
+    [SerializeField] private Animator animator;
 
     enum Rotation { Forward, Backward, Left, Right };
-    private float movementTime = 1f;
+    private float movementTime = 0.2f;
     private bool isMoving = false;
 
     public override void OnStartLocalPlayer()
@@ -106,7 +106,8 @@ public class PlayerMovement : NetworkBehaviour
 
         iTween.MoveTo(gameObject, new Vector3(x, 0f, z), movementTime);
         iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), movementTime);
-        jumpAnimation.Play();
+        animator.speed = 1 / movementTime;
+        animator.SetTrigger("Jump");
     }
 
     [Command]
