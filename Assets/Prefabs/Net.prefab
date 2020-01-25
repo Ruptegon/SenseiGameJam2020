@@ -53,7 +53,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: Online
   transport: {fileID: 73903804391569052}
-  networkAddress: 192.168.43.55
+  networkAddress: 
   maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 6293928884936610809, guid: a13339ca0386f594e879f7839f13e8f5,
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893829546595784688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
   m_Name: 

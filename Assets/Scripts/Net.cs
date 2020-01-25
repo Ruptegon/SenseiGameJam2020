@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class Net : NetworkManager
 {
+    public static Net instance;
+
     [SerializeField] BuildMode buildMode;
     public static bool IsServer;
     public static bool IsClient;
     new private void Awake()
     {
+        instance = this;
         base.Awake();
 
 #if UNITY_EDITOR
@@ -33,10 +36,12 @@ public class Net : NetworkManager
         {
             base.StartServer();
         }
-        else if(Net.IsClient)
-        {
-            base.Start();
-        }
+    }
+
+    public void PlayGame(string ipAddress)
+    {
+        networkAddress = ipAddress;
+        StartClient();
     }
 
     public override void OnServerConnect(NetworkConnection conn)
