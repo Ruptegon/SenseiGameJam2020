@@ -34,20 +34,28 @@ public class Builder : MonoBehaviour
             }
         }
 
-        Debug.Log("Building objects...");
+        Debug.Log($"Building objects...");
         for (int x = 0; x < world.SizeX; x++)
         {
             for (int z = 0; z < world.SizeZ; z++)
             {
-                InstantiateObject(world.Map[x, z], x, z);
+                var prefabId = world.Map[x, z];
+
+                if (prefabId == -1)
+                    continue;
+
+                InstantiateObject(prefabId, x, z);
             }
         }
     }
 
     private void InstantiateObject(int prefabId, int positionX, int positionZ)
     {
+        Debug.Log("SUPER DEBUG!");
         if (prefabId == -1)
             return;
+
+
 
         runtimeWorldAssets.Add(Instantiate(Prefabs[prefabId], new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform));
     }

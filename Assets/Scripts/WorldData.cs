@@ -18,9 +18,13 @@ public class WorldData : MessageBase
 
     public WorldData(int sizeX, int sizeZ)
     {
+        if (Net.IsClient)
+            return;
+
         SizeX = sizeX;
         SizeZ = sizeZ;
         Map = new int[SizeX, SizeZ];
+
         for (int x = 0; x < SizeX; x++)
         {
             for (int z = 0; z < SizeZ; z++)
@@ -30,9 +34,11 @@ public class WorldData : MessageBase
         }
     }
 
+
+
     public override void Deserialize(NetworkReader reader)
     {
-        Debug.Log("Deserializacja");
+        //Debug.Log("Deserializacja");
         SizeX = reader.ReadInt32();
         SizeZ = reader.ReadInt32();
 
@@ -42,7 +48,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 Map[x, z] = reader.ReadInt32();
-                Debug.Log($"[{x},{z}] = {Map[x,z]}");
+                //Debug.Log($"[{x},{z}] = {Map[x,z]}");
             }
         }
 
@@ -50,7 +56,7 @@ public class WorldData : MessageBase
 
     public override void Serialize(NetworkWriter writer)
     {
-        Debug.Log("Serializacja");
+        //Debug.Log("Serializacja");
 
         writer.WriteInt32(SizeX);
         writer.WriteInt32(SizeZ);
@@ -60,7 +66,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 writer.WriteInt32(Map[x, z]);
-                Debug.Log($"[{x},{z}] = {Map[x, z]}");
+                //Debug.Log($"[{x},{z}] = {Map[x, z]}");
             }
         }
     }
@@ -80,7 +86,12 @@ public class WorldData : MessageBase
 
     public void OnWorldData(NetworkConnection conn, WorldData msg)
     {
-        Debug.Log($"World [{msg.SizeX}:{msg.SizeZ}]");
+
+        SizeX = msg.SizeX;
+        SizeZ = msg.SizeZ;
+        Map = msg.Map;
+
+        Debug.Log($"World [{SizeX}:{SizeZ}]");
         GameManager.Instance.BuildWorld();
     }
 
