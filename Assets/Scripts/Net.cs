@@ -40,10 +40,13 @@ public class Net : NetworkManager
     public override void OnServerConnect(NetworkConnection conn)
     {
         if (!GameManager.Instance)
+        {
+            Debug.LogError("GameManager doesn't exist, disconnect client");
             conn.Disconnect();
+        }
         else
         {
-
+            GameManager.Instance.SendSyncToClient(conn);
         }
     }
 }
