@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class Player : NetworkBehaviour
 {
@@ -15,6 +16,9 @@ public class Player : NetworkBehaviour
     public float turnSensitivity = 5f;
     public float maxTurnSpeed = 150f;
 
+    [Header("HP")]
+    private int hp = 3;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -25,6 +29,39 @@ public class Player : NetworkBehaviour
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
             LocalPlayer = this;
+    }
+
+    public void Damage() 
+    {
+        hp -= 1;
+    }
+
+    public void Heal() 
+    {
+        hp += 1;
+    }
+
+    public void Restore() 
+    {
+        hp = 3;
+    }
+
+    public void Kill() 
+    {
+        hp = 0;
+    }
+
+    public void Update()
+    {
+        if (hp <= 0) 
+        {
+            RoundOver();
+        }
+    }
+
+    public void RoundOver() 
+    {
+    
     }
 
     /*void FixedUpdate()

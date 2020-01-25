@@ -24,17 +24,15 @@ public class PlayerMovement : MonoBehaviour
     {
         positionYCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 1), new Keyframe(timeToMove, 0));
         rotationCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 180), new Keyframe(timeToMove, 360));
-        //DPadUp.onClick.AddListener(MoveForward);
-        //DPadDown.onClick.AddListener(MoveBackward);
-        //DPadLeft.onClick.AddListener(MoveLeft);
-        //DPadRight.onClick.AddListener(MoveRight);
-        
-        Debug.Log("PlayerMovement added listeners");
+        DPadUp.onClick.AddListener(MoveForward);
+        DPadDown.onClick.AddListener(MoveBackward);
+        DPadLeft.onClick.AddListener(MoveLeft);
+        DPadRight.onClick.AddListener(MoveRight);
     }
 
     private void Update()
     {
-        Debug.Log("Rot = " + transform.localRotation.eulerAngles);
+        //Debug.Log("Rot = " + transform.localRotation.eulerAngles);
         if (canMove) 
         {
             this.transform.position += transform.forward * Time.deltaTime;
@@ -64,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
                 rotation = 0;
                 this.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            Debug.Log("PlayerMovement moveForward");
+            //Debug.Log("PlayerMovement moveForward");
             //animator.SetTrigger("move");
             Move();
         }
@@ -79,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
                 rotation = 1;
                 this.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            Debug.Log("PlayerMovement moveBackward");
+            //Debug.Log("PlayerMovement moveBackward");
             //animator.SetTrigger("move");
             Move();
         }
@@ -94,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 rotation = 2;
                 this.transform.rotation = Quaternion.Euler(0, 270, 0);
             }
-            Debug.Log("PlayerMovement moveLeft");
+            //Debug.Log("PlayerMovement moveLeft");
             //animator.SetTrigger("move");
             Move();
         }
@@ -109,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 rotation = 3;
                 this.transform.rotation = Quaternion.Euler(0, 90, 0);
             }
-            Debug.Log("PlayerMovement moveRight");
+            //Debug.Log("PlayerMovement moveRight");
             //animator.SetTrigger("move");
             Move();
         }
