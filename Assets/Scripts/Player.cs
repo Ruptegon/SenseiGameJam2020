@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
+    public static Player LocalPlayer;
+
     private CharacterController characterController;
 
     [Header("Movement Settings")]
@@ -15,6 +17,13 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        if (isLocalPlayer)
+            LocalPlayer = this;
     }
 
     void FixedUpdate()
