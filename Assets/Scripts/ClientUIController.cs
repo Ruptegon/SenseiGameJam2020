@@ -17,7 +17,7 @@ public class ClientUIController : MonoBehaviour
 
     private void Awake()
     {
-        //gameObject.SetActive(Net.IsClient);
+        gameObject.SetActive(Net.IsClient);
 
         UpArrow.onClick.AddListener(() => IncreaseValue(ref vertiaclInput));
         DownArrow.onClick.AddListener(() => DecreaseValue(ref vertiaclInput));
