@@ -46,6 +46,9 @@ public class Builder : MonoBehaviour
 
     private void InstantiateObject(int prefabId, int positionX, int positionZ)
     {
+        if (prefabId == -1)
+            return;
+
         runtimeWorldAssets.Add(Instantiate(Prefabs[prefabId], new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform));
     }
 
