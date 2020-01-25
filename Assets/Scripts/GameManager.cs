@@ -7,9 +7,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public static float SyncTimer = 0f;
+    public static float SyncTimer => (float)Instance.syncTimer.TimeValue;
 
     private WorldData worldData = new WorldData(11, 50);
+    private SyncTimer syncTimer = new SyncTimer();
     private Builder builder;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         builder.Init(worldData);
 
         worldData.RegisterHandler();
+        syncTimer.RegisterHandler();
     }
 
     private void Start()
@@ -35,6 +37,11 @@ public class GameManager : MonoBehaviour
             builder.BuildObject(builder.Prefabs[0], 4, 4);
 
         }
+    }
+
+    private void Update()
+    {
+        syncTimer.Update();
     }
 
     public void BuildWorld()
