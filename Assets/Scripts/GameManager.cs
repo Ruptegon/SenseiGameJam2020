@@ -8,9 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public Builder Builder = new Builder();
-
     private WorldData worldData = new WorldData(10, 50);
+    private Builder builder;
 
     private void Awake()
     {
@@ -18,7 +17,28 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        builder = GetComponent<Builder>();
+
+
         worldData.RegisterHandler();
+    }
+
+    private void Start()
+    {
+        if(Net.IsServer)
+        {
+            BuildWorld();
+        }
+    }
+
+    public void BuildWorld()
+    {
+        if (!builder)
+            Debug.LogError("Builder is not declared!");
+        else
+        {
+            builder.BuildWorld(worldData);
+        }
     }
 
 

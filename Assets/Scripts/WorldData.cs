@@ -46,6 +46,7 @@ public class WorldData : MessageBase
     public void OnWorldData(NetworkConnection conn, WorldData msg)
     {
         Debug.Log($"World [{msg.SizeX}:{msg.SizeZ}]");
+        GameManager.Instance.BuildWorld();
     }
 
 }

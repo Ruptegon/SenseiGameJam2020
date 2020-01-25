@@ -13,11 +13,13 @@ public class Net : NetworkManager
     {
         base.Awake();
 
+#if UNITY_EDITOR
         IsServer = buildMode.GameMode == BuildMode.Mode.Server;
         IsClient = buildMode.GameMode == BuildMode.Mode.Client;
-
-        //IsServer = Application.platform == RuntimePlatform.WindowsEditor;
-        //IsClient = Application.platform == RuntimePlatform.Android;
+#else
+        IsServer = Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer;
+        IsClient = Application.platform == RuntimePlatform.Android;
+#endif
 
         Debug.Log($"Net.Awake() status: IsClient: {IsClient}, IsServer: {IsServer}");
 
