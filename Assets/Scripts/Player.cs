@@ -9,26 +9,15 @@ public class Player : NetworkBehaviour
 {
     public static Player LocalPlayer;
 
-    private CharacterController characterController;
-
-    [Header("Movement Settings")]
-    public float moveSpeed = 8f;
-    public float turnSensitivity = 5f;
-    public float maxTurnSpeed = 150f;
-
     [Header("HP")]
     private int hp = 3;
-
-    private void Awake()
-    {
-        characterController = GetComponent<CharacterController>();
-    }
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
             LocalPlayer = this;
+
     }
 
     public void Damage() 
