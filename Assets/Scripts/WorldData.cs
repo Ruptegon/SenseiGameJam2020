@@ -41,8 +41,6 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 Map[x, z] = reader.ReadInt32();
-                if (Map[x, z] != -1)
-                    Debug.LogWarning("Great Deserialize!!!");
             }
         }
 
@@ -57,9 +55,7 @@ public class WorldData : MessageBase
         {
             for (int z = 0; z < SizeZ; z++)
             {
-                writer.WriteInt64(Map[x, z]);
-                if (Map[x, z] != -1)
-                    Debug.LogWarning("Great Serializa!!!");
+                writer.WriteInt32(Map[x, z]);
             }
         }
     }
