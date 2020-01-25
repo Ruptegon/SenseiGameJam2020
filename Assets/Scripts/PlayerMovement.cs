@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        positionYCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 1), new Keyframe(timeToMove, 0));
+        positionYCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 0.3f), new Keyframe(timeToMove, 0));
         rotationCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 180), new Keyframe(timeToMove, 360));
         DPadUp.onClick.AddListener(MoveForward);
         DPadDown.onClick.AddListener(MoveBackward);
@@ -35,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("Rot = " + transform.localRotation.eulerAngles);
         if (canMove) 
         {
-            this.transform.position += transform.forward * Time.deltaTime;
+            this.transform.position += 0.3f * transform.forward * Time.deltaTime;
             this.transform.position = new Vector3(transform.position.x, positionYCurve.Evaluate(time), transform.position.z);
-            this.transform.rotation.eulerAngles.Set(rotationCurve.Evaluate(time), transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); // demands fix
+            //this.transform.rotation = Quaternion.Euler(rotationCurve.Evaluate(time), transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); // demands fix
             time += Time.deltaTime;
             if (time >= timeToMove && transform.position.y == 0) 
             {
