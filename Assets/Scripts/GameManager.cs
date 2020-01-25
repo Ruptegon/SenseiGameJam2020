@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         builder = GetComponent<Builder>();
-
+        builder.Init(worldData);
 
         worldData.RegisterHandler();
     }
