@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private WorldData worldData = new WorldData(10, 50);
+    private WorldData worldData = new WorldData(11, 50);
     private Builder builder;
 
     private void Awake()
