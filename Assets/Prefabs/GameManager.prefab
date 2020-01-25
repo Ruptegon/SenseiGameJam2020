@@ -58,4 +58,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 7204659831210105307, guid: 21f399054440c014eaaff19b6b8b0fa2,
     type: 3}
-  Prefabs: []
+  Prefabs:
+  - {fileID: 2650492376410142918, guid: 8f5734d50ce24974893d7fb9bd29deb0, type: 3}
+  runtimeWorldAssets: []

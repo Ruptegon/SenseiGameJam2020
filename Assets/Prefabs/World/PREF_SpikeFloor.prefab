@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5077307646442549563}
   - component: {fileID: 1402967275221466150}
   m_Layer: 0
-  m_Name: PREF_SpikeFloor 1
+  m_Name: PREF_SpikeFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikes: {fileID: 1491055569322148892}
-  time: 3
+  delayTime: 0
+  height: 0.8
+  timer: 2
 --- !u!1001 &7293488792556063015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +125,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 30f9c739cd56a864b8b134a7075afb30,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 30f9c739cd56a864b8b134a7075afb30,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 30f9c739cd56a864b8b134a7075afb30,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: 30f9c739cd56a864b8b134a7075afb30,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -156,7 +173,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7289bcbd3ec0a504695bb73cb7568877,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.58
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7289bcbd3ec0a504695bb73cb7568877,
         type: 3}
@@ -202,6 +219,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 7289bcbd3ec0a504695bb73cb7568877,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 7289bcbd3ec0a504695bb73cb7568877,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 7289bcbd3ec0a504695bb73cb7568877,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: 7289bcbd3ec0a504695bb73cb7568877,
         type: 3}

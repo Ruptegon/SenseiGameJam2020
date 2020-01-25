@@ -30,7 +30,7 @@ public class Builder : MonoBehaviour
         {
             for (int z = 0; z < data.SizeZ; z++)
             {
-                runtimeWorldAssets.Add(Instantiate(FloorPrefab, new Vector3(x, -1, z), Quaternion.identity, transform));
+                runtimeWorldAssets.Add(Instantiate(FloorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity, transform));
             }
         }
 

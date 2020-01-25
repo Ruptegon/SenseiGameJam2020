@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveSpikes : MonoBehaviour
 {
-
     public GameObject spikes;
     public float delayTime;
     private bool isUp;
