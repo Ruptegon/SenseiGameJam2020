@@ -8,6 +8,16 @@ public class WorldData : MessageBase
     public int SizeX;
     public int SizeZ;
 
+    public WorldData()
+    {
+
+    }
+
+    public WorldData(int x, int z)
+    {
+        SizeX = x;
+        SizeZ = z;
+    }
     public override void Deserialize(NetworkReader reader)
     {
         SizeX = reader.ReadInt32();

@@ -8,21 +8,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private WorldData worldData;
+    public Builder Builder = new Builder();
+
+    private WorldData worldData = new WorldData(10, 50);
+
     private void Awake()
     {
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
 
-        worldData = new WorldData();
-
-        worldData.SizeX = 10;
-        worldData.SizeZ = 50;
-
         worldData.RegisterHandler();
     }
-
 
 
     internal void SendSyncToClient(NetworkConnection conn)

@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172ecce19f1f4804ea97db1aefabbb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Builder:
+    FloorPrefab: {fileID: 7204659831210105307, guid: 21f399054440c014eaaff19b6b8b0fa2,
+      type: 3}
+    Prefabs: []
