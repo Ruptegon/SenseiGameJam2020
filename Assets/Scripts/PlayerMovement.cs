@@ -1,114 +1,125 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
-    [SerializeField] Button DPadUp;
-    [SerializeField] Button DPadDown;
-    [SerializeField] Button DPadLeft;
-    [SerializeField] Button DPadRight;
+    [SerializeField] private Animation jumpAnimation;
 
-    public static float timeToMove = 1;
+    enum Rotation { Forward, Backward, Left, Right };
+    private float movementTime = 1f;
+    private bool isMoving = false;
 
-    private int rotation = 0; //0 - forward, 1 - backward, 2 - left, 3 - right
-    private bool canMove = false;
-    private float time = 0;
-
-    public AnimationCurve positionYCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 1), new Keyframe(timeToMove, 0));
-    public AnimationCurve rotationCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f * timeToMove, 180), new Keyframe(timeToMove, 360));
-
-    // Start is called before the first frame update
-    private void Start()
+    public override void OnStartLocalPlayer()
     {
-        ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForward);
-        ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackward);
-        ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeft);
-        ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRight);
-    }
-
-    private void Update()
-    {
-        //Debug.Log("Rot = " + transform.localRotation.eulerAngles);
-        if (canMove) 
+        base.OnStartLocalPlayer();
+        if (isLocalPlayer)
         {
-            this.transform.position += 1 * transform.forward * Time.deltaTime;
-            this.transform.position = new Vector3(transform.position.x, positionYCurve.Evaluate(time), transform.position.z);
-            //this.transform.rotation = Quaternion.Euler(rotationCurve.Evaluate(time), transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); // demands fix
-            time += Time.deltaTime;
-            if (time >= timeToMove && transform.position.y == 0) 
-            {
-                canMove = false;
-            }
-        }
-        
-    }
-
-    private void Move()
-    {
-        time = 0;
-        canMove = true;
-    }
-
-    private void MoveForward()
-    {
-        if (!canMove)
-        {
-            if (rotation != 0)
-            {
-                rotation = 0;
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            //Debug.Log("PlayerMovement moveForward");
-            //animator.SetTrigger("move");
-            Move();
+            ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForward);
+            ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackward);
+            ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeft);
+            ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRight);
         }
     }
 
-    private void MoveBackward()
+    private async void BlockMoving()
     {
-        if (!canMove)
-        {
-            if (rotation != 1)
-            {
-                rotation = 1;
-                this.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            //Debug.Log("PlayerMovement moveBackward");
-            //animator.SetTrigger("move");
-            Move();
-        }
-    }
-
-    private void MoveLeft()
-    {
-        if (!canMove)
-        {
-            if (rotation != 2)
-            {
-                rotation = 2;
-                this.transform.rotation = Quaternion.Euler(0, 270, 0);
-            }
-            //Debug.Log("PlayerMovement moveLeft");
-            //animator.SetTrigger("move");
-            Move();
-        }
+        isMoving = true;
+        await Task.Delay(TimeSpan.FromSeconds(movementTime));
+        isMoving = false;
     }
 
     private void MoveRight()
     {
-        if (!canMove)
+        if (isMoving)
+            return;
+
+        BlockMoving();
+
+        var xPosition = (int)transform.position.x;
+        var zPosition = (int)transform.position.z;
+        CmdMoveTo(xPosition + 1, zPosition, (int)Rotation.Right);
+
+    }
+
+    private void MoveLeft()
+    {
+        if (isMoving)
+            return;
+
+        BlockMoving();
+
+        var xPosition = (int)transform.position.x;
+        var zPosition = (int)transform.position.z;
+        CmdMoveTo(xPosition - 1, zPosition, (int)Rotation.Left);
+
+    }
+
+    private void MoveBackward()
+    {
+        if (isMoving)
+            return;
+
+        BlockMoving();
+
+        var xPosition = (int)transform.position.x;
+        var zPosition = (int)transform.position.z;
+        CmdMoveTo(xPosition, zPosition - 1, (int)Rotation.Backward);
+
+    }
+
+    private void MoveForward()
+    {
+        if (isMoving)
+            return;
+
+        BlockMoving();
+
+        var xPosition = (int)transform.position.x;
+        var zPosition = (int)transform.position.z;
+        CmdMoveTo(xPosition, zPosition + 1, (int)Rotation.Forward);
+
+    }
+
+    private void MoveTo(int x, int z, int rotation)
+    {
+        Vector3 GetRotation(Rotation rot)
         {
-            if (rotation != 3)
+            switch (rot)
             {
-                rotation = 3;
-                this.transform.rotation = Quaternion.Euler(0, 90, 0);
+                case Rotation.Forward:
+                    return Vector3.forward;
+                case Rotation.Backward:
+                    return Vector3.back;
+                case Rotation.Left:
+                    return Vector3.left;
+                case Rotation.Right:
+                    return Vector3.right;
+                default:
+                    return Vector3.forward;
             }
-            //Debug.Log("PlayerMovement moveRight");
-            //animator.SetTrigger("move");
-            Move();
         }
+
+        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), movementTime);
+        iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), movementTime);
+        jumpAnimation.Play();
+    }
+
+    [Command]
+    private void CmdMoveTo(int x, int z, int rotation)
+    {
+        MoveTo(x, z, rotation);
+        RpcMoveTo(x, z, rotation);
+    }
+
+    [ClientRpc]
+    private void RpcMoveTo(int x, int z, int rotation)
+    {
+        MoveTo(x, z, rotation);
     }
 }
 
