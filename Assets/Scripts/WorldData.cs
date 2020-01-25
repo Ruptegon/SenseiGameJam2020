@@ -81,7 +81,7 @@ public class WorldData : MessageBase
 
     public bool AddObject(int prefabId, int positionX, int positionZ)
     {
-        if (Map[positionX, positionZ] == -1)
+        if (Map[positionX, positionZ] != -1)
             return false;
 
         Map[positionX, positionZ] = prefabId;

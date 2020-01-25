@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
             builder.BuildObject(builder.Prefabs[0], 2, 2);
             builder.BuildObject(builder.Prefabs[0], 3, 3);
             builder.BuildObject(builder.Prefabs[0], 4, 4);
+
         }
     }
 
