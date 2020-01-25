@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class Player : NetworkBehaviour
 {
+    public static string PlayerName = "default";
     public static Player LocalPlayer;
 
     [Header("HP")]
