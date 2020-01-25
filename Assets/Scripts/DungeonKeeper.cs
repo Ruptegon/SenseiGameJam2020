@@ -42,7 +42,7 @@ public class DungeonKeeper : MonoBehaviour
         Debug.Log("Mouse down!");
         var mousePos = Input.mousePosition;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x <= 11 && worldPos.z <= 40) 
+        if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x <= 11 && worldPos.z < 50) 
         {
             GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z);
         }
