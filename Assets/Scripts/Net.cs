@@ -36,4 +36,14 @@ public class Net : NetworkManager
             base.Start();
         }
     }
+
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        if (!GameManager.Instance)
+            conn.Disconnect();
+        else
+        {
+
+        }
+    }
 }
