@@ -22,27 +22,7 @@ public class ClientUIController : MonoBehaviour
         Instance = this;
         
         gameObject.SetActive(Net.IsClient);
-
-
-
-        UpArrow.onClick.AddListener(() => IncreaseValue(ref VertiaclInput));
-        DownArrow.onClick.AddListener(() => DecreaseValue(ref VertiaclInput));
-        RightArrow.onClick.AddListener(() => IncreaseValue(ref HorizontalInput));
-        LeftArrow.onClick.AddListener(() => DecreaseValue(ref HorizontalInput));
     }
 
-    private void IncreaseValue(ref float value)
-    {
-        value += 0.1f;
-    }
 
-    private void DecreaseValue(ref float value)
-    {
-        value -= 0.1f;
-    }
-
-    private void Update()
-    {
-        Debug.Log($"Horizontal: {HorizontalInput}, Vertical: {VertiaclInput}");
-    }
 }
