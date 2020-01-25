@@ -32,6 +32,7 @@ public class WorldData : MessageBase
 
     public override void Deserialize(NetworkReader reader)
     {
+        Debug.Log("Deserializacja");
         SizeX = reader.ReadInt32();
         SizeZ = reader.ReadInt32();
 
@@ -41,6 +42,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 Map[x, z] = reader.ReadInt32();
+                Debug.Log($"[{x},{z}] = {Map[x,z]}");
             }
         }
 
@@ -48,6 +50,8 @@ public class WorldData : MessageBase
 
     public override void Serialize(NetworkWriter writer)
     {
+        Debug.Log("Serializacja");
+
         writer.WriteInt32(SizeX);
         writer.WriteInt32(SizeZ);
 
@@ -56,6 +60,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 writer.WriteInt32(Map[x, z]);
+                Debug.Log($"[{x},{z}] = {Map[x, z]}");
             }
         }
     }
