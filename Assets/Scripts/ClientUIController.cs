@@ -6,18 +6,24 @@ using UnityEngine.UI;
 
 public class ClientUIController : MonoBehaviour
 {
-    
-    [SerializeField] private Button UpArrow; 
-    [SerializeField] private Button DownArrow; 
-    [SerializeField] private Button RightArrow; 
-    [SerializeField] private Button LeftArrow;
+
+    public static ClientUIController Instance;
+
+    [SerializeField] public Button UpArrow; 
+    [SerializeField] public Button DownArrow; 
+    [SerializeField] public Button RightArrow; 
+    [SerializeField] public Button LeftArrow;
 
     public static float HorizontalInput;
     public static float VertiaclInput;
 
     private void Awake()
     {
+        Instance = this;
+        
         gameObject.SetActive(Net.IsClient);
+
+
 
         UpArrow.onClick.AddListener(() => IncreaseValue(ref VertiaclInput));
         DownArrow.onClick.AddListener(() => DecreaseValue(ref VertiaclInput));
