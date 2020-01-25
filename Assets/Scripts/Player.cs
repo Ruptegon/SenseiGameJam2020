@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
@@ -26,7 +27,7 @@ public class Player : NetworkBehaviour
             LocalPlayer = this;
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         if (!isLocalPlayer || characterController == null) return;
 
@@ -39,5 +40,5 @@ public class Player : NetworkBehaviour
         direction *= moveSpeed;
 
         characterController.SimpleMove(direction);
-    }
+    }*/
 }
