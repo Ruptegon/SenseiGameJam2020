@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ipAddressInputField: {fileID: 8942804624449115692}
-  playerNameInputField: {fileID: 0}
+  playerNameInputField: {fileID: 6343606554865790346}
   playButton: {fileID: 6640060250121375701}
 --- !u!1 &1046186932476114698
 GameObject:
