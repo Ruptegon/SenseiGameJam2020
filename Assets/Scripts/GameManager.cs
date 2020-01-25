@@ -32,8 +32,15 @@ public class GameManager : MonoBehaviour
             BuildWorld();
 
             Builder.BuildObject(Builder.Prefabs[0], 2, 2);
-            Builder.BuildObject(Builder.Prefabs[0], 3, 3);
-            Builder.BuildObject(Builder.Prefabs[0], 4, 4);
+            Builder.BuildObject(Builder.Prefabs[1], 3, 3);
+            Builder.BuildObject(Builder.Prefabs[2], 4, 4);
+            Builder.BuildObject(Builder.Prefabs[3], 5, 5);
+            Builder.BuildObject(Builder.Prefabs[4], 1, 6);
+            Builder.BuildObject(Builder.Prefabs[5], 2, 7);
+            Builder.BuildObject(Builder.Prefabs[6], 3, 8);
+            Builder.BuildObject(Builder.Prefabs[7], 4, 9);
+            Builder.BuildObject(Builder.Prefabs[8], 5, 10);
+            Builder.BuildObject(Builder.Prefabs[9], 6, 10);
 
         }
     }
