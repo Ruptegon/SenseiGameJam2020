@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public static float SyncTimer = 0f;
 
     private WorldData worldData = new WorldData(11, 50);
     private Builder builder;

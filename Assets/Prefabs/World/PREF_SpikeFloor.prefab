@@ -61,8 +61,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spikes: {fileID: 1491055569322148892}
   delayTime: 0
-  height: 0.8
-  timer: 2
+  yPositionOfTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.0354012
+      outSlope: 0.0354012
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31280243
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 0
+    m_RotationOrder: 4
 --- !u!1001 &7293488792556063015
 PrefabInstance:
   m_ObjectHideFlags: 0

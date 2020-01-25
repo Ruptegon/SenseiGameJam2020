@@ -4,31 +4,14 @@ using UnityEngine;
 
 public class MoveSpikes : MonoBehaviour
 {
-    public GameObject spikes;
-    public float delayTime;
-    private bool isUp;
-    public float height;
-    public float timer;
+    [SerializeField] GameObject spikes;
+    [SerializeField] float delayTime;
+    [SerializeField] AnimationCurve yPositionOfTime;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        isUp = false;
-        InvokeRepeating("SpikesMoving", delayTime, timer);
-    }
-
-    void SpikesMoving()
-    {
-        if(!isUp)
-        {
-            iTween.MoveBy(spikes, new Vector3(0, height, 0), 1);
-            isUp = true;
-        }
-        else if (isUp)
-        {
-            iTween.MoveBy(spikes, new Vector3(0, -height, 0), 1);
-            isUp = false;
-        }
+        float y = yPositionOfTime.Evaluate(delayTime + (float)GameManager.SyncTimer);
+        spikes.transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
 }
