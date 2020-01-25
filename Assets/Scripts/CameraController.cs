@@ -10,15 +10,30 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!Player.LocalPlayer)
+        if (Net.IsServer) 
         {
-            return;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) 
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.15f);
+            }
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.15f);
+            }
         }
+        else 
+        {
+            if (!Player.LocalPlayer)
+            {
+                return;
+            }
 
-        var playerTransform = Player.LocalPlayer.transform;
-        var playerPosition = playerTransform.position;
+            var playerTransform = Player.LocalPlayer.transform;
+            var playerPosition = playerTransform.position;
 
-        transform.position = new Vector3(xPosition, playerPosition.y + yPlayerOffset, playerPosition.z + zPlayerOffset);
-        transform.LookAt(new Vector3(xPosition, playerPosition.y, playerPosition.z), Vector3.up);
+            transform.position = new Vector3(xPosition, playerPosition.y + yPlayerOffset, playerPosition.z + zPlayerOffset);
+            transform.LookAt(new Vector3(xPosition, playerPosition.y, playerPosition.z), Vector3.up);
+        }
+        
     }
 }
