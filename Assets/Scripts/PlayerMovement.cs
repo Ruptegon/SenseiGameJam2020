@@ -175,7 +175,7 @@ public class PlayerMovement : NetworkBehaviour
     private void MoveTo(int x, int z)
     {
         iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
-        animator.speed = 1 / animationMovementTime;
+        //animator.speed = 1 / animationMovementTime;
         animator.SetTrigger("Jump");
     }
 
