@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static Builder Builder;
     public static WorldData World => Instance.worldData;
     public static GameStatusData.GameStatus GameStatus => Instance.gameStatus.CurrentStatus;
-
+    public static ChestScore GoalChest = new ChestScore();
 
     private WorldData worldData = new WorldData(7, 30);
     private SyncTimer syncTimer = new SyncTimer();
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameStatus " + GameStatus);
     }
 
+    //Server
     public void StartGameplayRunStage()
     {
         if (GameStatus == GameStatusData.GameStatus.GameplayRun)
@@ -76,10 +77,14 @@ public class GameManager : MonoBehaviour
         gameStatus.CurrentStatus = GameStatusData.GameStatus.GameplayRun;
         NetworkServer.SendToAll(worldData);
         NetworkServer.SendToAll(gameStatus);
+
         ServerUIController.instance.ResetMatch();
+        GoalChest.Init(Player.Instances.Count);
+
         Debug.Log("StartGameplayRunStage");
     }
 
+    //Server
     public void StartBuildAndConnectStage()
     {
         if (GameStatus == GameStatusData.GameStatus.BuildAndConnect)
@@ -87,6 +92,9 @@ public class GameManager : MonoBehaviour
 
         gameStatus.CurrentStatus = GameStatusData.GameStatus.BuildAndConnect;
         NetworkServer.SendToAll(gameStatus);
+
+        GoalChest.GiveAllToServer();
+
         Debug.Log("StartBuildAndConnectStage");
     }
 
