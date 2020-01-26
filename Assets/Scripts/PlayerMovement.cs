@@ -11,6 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Animator animator;
 
     enum Rotation { Forward, Backward, Left, Right };
+    private Rotation currentRotation = Rotation.Forward;
     private float movementTime = 0.2f;
     private bool isMoving = false;
 
@@ -19,10 +20,94 @@ public class PlayerMovement : NetworkBehaviour
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
         {
-            ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForward);
-            ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackward);
-            ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeft);
-            ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRight);
+            ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForwardLocal);
+            ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackwardLocal);
+            ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeftLocal);
+            ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRightLocal);
+        }
+    }
+
+    private void MoveRightLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveRight();
+                break;
+            case Rotation.Backward:
+                MoveLeft();
+                break;
+            case Rotation.Left:
+                MoveForward();
+                break;
+            case Rotation.Right:
+                MoveBackward();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveLeftLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveLeft();
+                break;
+            case Rotation.Backward:
+                MoveRight();
+                break;
+            case Rotation.Left:
+                MoveForward();
+                break;
+            case Rotation.Right:
+                MoveBackward();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveBackwardLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveBackward();
+                break;
+            case Rotation.Backward:
+                MoveForward();
+                break;
+            case Rotation.Left:
+                MoveRight();
+                break;
+            case Rotation.Right:
+                MoveLeft();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveForwardLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveForward();
+                break;
+            case Rotation.Backward:
+                MoveBackward();
+                break;
+            case Rotation.Left:
+                MoveLeft();
+                break;
+            case Rotation.Right:
+                MoveRight();
+                break;
+            default:
+                break;
         }
     }
 
@@ -104,12 +189,14 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
+        currentRotation = (Rotation)rotation;
         var animationMovementTime = movementTime * 0.8f;
 
         iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
-        iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), animationMovementTime);
+        iTween.RotateTo(gameObject, GetRotation(currentRotation), animationMovementTime);
         animator.speed = 1 / animationMovementTime;
         animator.SetTrigger("Jump");
+
     }
 
     [Command]
