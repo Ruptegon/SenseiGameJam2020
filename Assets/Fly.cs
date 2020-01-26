@@ -4,29 +4,15 @@ using UnityEngine;
 
 public class Fly : MonoBehaviour
 {
-    private float time = 0;
-    private float previousTime = 0;
-    private float lifeTime = 0;
-
-    // Update is called once per frame
-
-    private void Start()
-    {
-        previousTime = (float)GameManager.SyncTimer;
-    }
+    private float lifeTime = 30f;
+    private float speed = 1f;
 
     void Update()
     {
-        time = ((float)GameManager.SyncTimer - previousTime);
-        lifeTime += time;
-        //Debug.Log("syncTime = " + (float)GameManager.SyncTimer);
-        //Debug.Log("time = " + time);
-        //Debug.Log("lifeTime = " + lifeTime);
-        transform.position += transform.forward * time;
-        previousTime = (float)GameManager.SyncTimer;
-        if (lifeTime >= 20) 
-        {
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0f)
             Destroy(gameObject);
-        }
+
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 }
