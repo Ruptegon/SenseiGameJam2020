@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 public class Player : NetworkBehaviour
 {
+    public static List<Player> Instances = new List<Player>();
+
     public static string LocalPlayerName = "default";
     public static Player LocalPlayer;
 
@@ -57,5 +59,14 @@ public class Player : NetworkBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        Instances.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        Instances.Remove(this);
+    }
 
 }
