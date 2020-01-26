@@ -168,71 +168,146 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fc906372b1596469f4da5bb3870df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionYCurve:
+  positionX:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.000000012340024
+      time: 0
       value: 0
       inSlope: 0
-      outSlope: 1.0012219
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  positionZ:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: -1.1789283
+      outSlope: -1.1789283
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12971628
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 0
+    m_RotationOrder: 4
+  positionY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 2
+      value: 2
+      inSlope: 1
+      outSlope: -1
+      tangentMode: 65
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 6
+      value: -2
+      inSlope: -1
+      outSlope: 1
       tangentMode: 69
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.50056756
-      value: 0.5011792
-      inSlope: 0.000083208084
-      outSlope: 0.000083208084
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9988623
-      value: 0.0023584906
-      inSlope: -1.0010555
+      time: 8
+      value: 0
+      inSlope: 1
       outSlope: 0
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
+    m_PreInfinity: 0
+    m_PostInfinity: 0
     m_RotationOrder: 4
-  rotation:
+  rotationY:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.000000003958121
-      value: 1
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 2.9641843
-      value: -1.0101719
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
+      time: 1.9
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 5.9590592
-      value: -1.0085413
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
+      time: 2.1
+      value: 180
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 1
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3.9
+      value: 180
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 4.1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 6
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 0
     m_RotationOrder: 4
 --- !u!1001 &1029581630025690299
 PrefabInstance:
