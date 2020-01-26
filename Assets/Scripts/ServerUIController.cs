@@ -9,22 +9,6 @@ public class ServerUIController : MonoBehaviour
 
     [SerializeField] RightServerUI rightServerUI;
 
-    public List<(Player, bool)> playersWhoFinished = new List<(Player, bool)>();
-
-    public void ResetMatch()
-    {
-        Debug.Log("playerWhoFinished.Clear()");
-        playersWhoFinished.Clear();
-    }
-
-    public void AddPlayerWhoFinished(Player player, bool wasAlive)
-    {
-        if (playersWhoFinished.Contains((player, true)) || playersWhoFinished.Contains((player, false)))
-            return;
-
-        playersWhoFinished.Add((player, wasAlive));
-    }
-
     private void Awake()
     {
         instance = this;

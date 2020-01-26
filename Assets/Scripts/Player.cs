@@ -8,6 +8,22 @@ using System;
 
 public class Player : NetworkBehaviour
 {
+    public static List<(Player, bool)> PlayersWhoFinished = new List<(Player, bool)>();
+
+    public static void ResetMatch()
+    {
+        Debug.Log("playerWhoFinished.Clear()");
+        PlayersWhoFinished.Clear();
+    }
+
+    public static void AddPlayerWhoFinished(Player player, bool wasAlive)
+    {
+        if (PlayersWhoFinished.Contains((player, true)) || PlayersWhoFinished.Contains((player, false)))
+            return;
+
+        PlayersWhoFinished.Add((player, wasAlive));
+    }
+
     public static List<Player> Instances = new List<Player>();
 
     public static string LocalPlayerName = "default";
@@ -119,7 +135,7 @@ public class Player : NetworkBehaviour
     [Command]
     void CmdSendEndCommunicat(bool isAlive)
     {
-        ServerUIController.instance.AddPlayerWhoFinished(this, isAlive);
+        Player.AddPlayerWhoFinished(this, isAlive);
     }
 
     private void OnTriggerEnter(Collider other)

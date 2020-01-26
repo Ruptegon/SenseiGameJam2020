@@ -44,7 +44,7 @@ public class ClientUIController : MonoBehaviour
         {
             waitingForFinishCanvas.SetActive(true);
             placement.text = "";
-            var playersWhoFinished = ServerUIController.instance.playersWhoFinished;
+            var playersWhoFinished = Player.PlayersWhoFinished;
             for (int i = 0; i < playersWhoFinished.Count; i++)
             {
                 var player = playersWhoFinished[i].Item1;

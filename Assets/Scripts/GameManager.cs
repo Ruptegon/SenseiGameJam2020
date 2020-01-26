@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         else if(GameStatus == GameStatusData.GameStatus.GameplayRun)
         {
             Player.LocalPlayer.ResetPlayer();
-            ServerUIController.instance.ResetMatch(); //TODO: To jest złe miejsce na takie rzeczy!
+            Player.ResetMatch(); //TODO: To jest złe miejsce na takie rzeczy!
         }
         Debug.Log("GameStatus " + GameStatus);
     }
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         NetworkServer.SendToAll(worldData);
         NetworkServer.SendToAll(gameStatus);
 
-        ServerUIController.instance.ResetMatch();
+        Player.ResetMatch();
         GoalChest.Init(Player.Instances.Count);
 
         Debug.Log("StartGameplayRunStage");
