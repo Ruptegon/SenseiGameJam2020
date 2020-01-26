@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
         worldData.RegisterHandler();
         syncTimer.RegisterHandler();
+        gameStatus.RegisterHandler();
     }
 
     private void Start()
