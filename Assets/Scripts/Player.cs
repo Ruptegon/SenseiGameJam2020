@@ -60,7 +60,7 @@ public class Player : NetworkBehaviour
         set
         {
             hp = value;
-            if (hp < 0)
+            if (hp =< 0)
                 OnDeath();
         }
     }

@@ -24,7 +24,7 @@ public class Fall : MonoBehaviour
         {
             var time = GameManager.SyncTimer;
             float value = fallDown.Evaluate(time);
-            transform.localScale = new Vector3(value, value, value);
+            victim.transform.localScale = new Vector3(value, value, value);
             if (value < 0.1) 
             {
                 playerIsFalling = false;
