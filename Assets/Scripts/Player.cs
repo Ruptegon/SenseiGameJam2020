@@ -7,71 +7,55 @@ using System.Threading.Tasks;
 
 public class Player : NetworkBehaviour
 {
-    public static string PlayerName = "default";
+    public static string LocalPlayerName = "default";
     public static Player LocalPlayer;
 
-    [Header("HP")]
-    private int hp = 3;
-    public int gold = 0;
+    public string PlayerName;
+
+    public int HP = 3;
+    public int Gold = 0;
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
+        {
             LocalPlayer = this;
-
+            CmdSetPlayerName(LocalPlayerName);
+        }
     }
 
-    public void Damage() 
+    [Command]
+    public void CmdSetPlayerName(string name)
     {
-        hp -= 1;
+        PlayerName = name;
+        RpcSetPlayerName(name);
     }
 
-    public void Heal() 
+    [ClientRpc]
+    public void RpcSetPlayerName(string name)
     {
-        hp += 1;
+        PlayerName = name;
     }
 
-    public void Restore() 
-    {
-        hp = 3;
-    }
+    public void Damage() => HP--;
+    public void Heal() => HP++;
+    public void Restore() => HP = 3;
+    public void Kill() => HP = 0;
 
-    public void Kill() 
-    {
-        hp = 0;
-    }
-
-    public int GetHp() 
-    {
-        return hp;
-    }
 
     public void Update()
     {
-        if (hp <= 0) 
+        if (HP <= 0)
         {
             RoundOver();
         }
     }
 
-    public void RoundOver() 
+    public void RoundOver()
     {
-    
+
     }
 
-    /*void FixedUpdate()
-    {
-        if (!isLocalPlayer || characterController == null) return;
 
-        var horizontal = ClientUIController.HorizontalInput;
-        var vertical = ClientUIController.VertiaclInput;
-
-        Vector3 direction = new Vector3(horizontal, 0f, vertical);
-        direction = Vector3.ClampMagnitude(direction, 1f);
-        direction = transform.TransformDirection(direction);
-        direction *= moveSpeed;
-
-        characterController.SimpleMove(direction);
-    }*/
 }

@@ -37,14 +37,14 @@ public class ClientUIController : MonoBehaviour
         {
             return;
         }
-        Gold.text = Player.LocalPlayer.gold.ToString();
-        if (Player.LocalPlayer.GetHp() < 3) 
+        Gold.text = Player.LocalPlayer.Gold.ToString();
+        if (Player.LocalPlayer.HP < 3) 
         {
             heart1.enabled = false;
-            if (Player.LocalPlayer.GetHp() < 2)
+            if (Player.LocalPlayer.HP < 2)
             {
                 heart2.enabled = false;
-                if (Player.LocalPlayer.GetHp() < 1)
+                if (Player.LocalPlayer.HP < 1)
                 {
                     heart3.enabled = false;
                 }
