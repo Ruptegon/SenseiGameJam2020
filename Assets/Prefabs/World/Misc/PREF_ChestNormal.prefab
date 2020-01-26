@@ -119,6 +119,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  type: 1
+  scoreToAdd: 16
 --- !u!1 &7548911612066472856
 GameObject:
   m_ObjectHideFlags: 0
