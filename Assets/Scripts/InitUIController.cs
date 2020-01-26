@@ -23,10 +23,10 @@ public class InitUIController : MonoBehaviour
         var address = ipAddressInputField.text;
         var playerName = playerNameInputField.text;
 
-        if (!string.IsNullOrEmpty(address))
-            Net.instance.PlayGame(address);
+        if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(playerName))
+            return;
 
-        if (!string.IsNullOrEmpty(playerName))
-            Player.LocalPlayerName = playerName;
+        Net.instance.PlayGame(address);
+        Player.LocalPlayerName = playerName;
     }
 }

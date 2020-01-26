@@ -5,7 +5,6 @@ using TMPro;
 
 public class ServerUIController : MonoBehaviour
 {
-    public static int ServerScore = 0;
     public static ServerUIController instance;
 
     [SerializeField] RightServerUI rightServerUI;
@@ -47,7 +46,7 @@ public class ServerUIController : MonoBehaviour
     private void Update()
     {
         rightServerUI.PlayerCountText.text = $"Player Count: {Player.Instances.Count}";
-        rightServerUI.ServerPlayerScore.text =  $"Your Score: {ServerScore}";
+        rightServerUI.ServerPlayerScore.text =  $"Your Score: {ChestScore.ServerScore}";
     }
 
     private void OnServerStartClick()

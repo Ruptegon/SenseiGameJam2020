@@ -88,6 +88,11 @@ public class Player : NetworkBehaviour
     public void Heal() => HP++;
     public void Kill() => HP = 0;
 
+    private void Start()
+    {
+        ResetPlayer();
+    }
+
     public void OnDeath()
     {
         if (isLocalPlayer)
