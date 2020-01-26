@@ -68,7 +68,7 @@ MonoBehaviour:
       type: 3}
     Passable: 1
   - Prefab: {fileID: 286645277949960065, guid: 735394341092c3144939ea9bd86a6293, type: 3}
-    Passable: 0
+    Passable: 1
   - Prefab: {fileID: 2647134118650524726, guid: 51f415d0bf2429445b400e1c1d4e82f2,
       type: 3}
     Passable: 0
@@ -90,3 +90,6 @@ MonoBehaviour:
   - Prefab: {fileID: 5171546704560203505, guid: 5491f6a169e9d2646bf5ff2b772e6b62,
       type: 3}
     Passable: 1
+  OnWorldRebuild:
+    m_PersistentCalls:
+      m_Calls: []
