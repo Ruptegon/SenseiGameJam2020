@@ -37,7 +37,7 @@ public class Scoreboard : MonoBehaviour
             if (string.IsNullOrEmpty(players[i].PlayerName))
                 needToUpdate = true;
 
-            scores.text += i + ". " + players[i].PlayerName + " - " + players[i].Gold + " PKT.\n";
+            scores.text += i + ". " + players[i].PlayerName + " - " + players[i].Gold + " Pnts.\n";
         }
     }
 
