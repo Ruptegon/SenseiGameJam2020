@@ -45,7 +45,6 @@ public class Player : NetworkBehaviour
 
     public void Damage() => HP--;
     public void Heal() => HP++;
-    public void Restore() => HP = 3;
     public void Kill() => HP = 0;
 
 
@@ -72,4 +71,10 @@ public class Player : NetworkBehaviour
         Instances.Remove(this);
     }
 
+    public void ResetPlayer()
+    {
+        var xPosition = Mathf.CeilToInt(GameManager.World.SizeX / 2f);
+        transform.position = new Vector3(xPosition, 0f, 0f);
+        HP = 3;
+    }
 }

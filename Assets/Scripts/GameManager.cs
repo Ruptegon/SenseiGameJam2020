@@ -63,13 +63,32 @@ public class GameManager : MonoBehaviour
         }
         else if(GameStatus == GameStatusData.GameStatus.GameplayRun)
         {
-
+            Player.LocalPlayer.ResetPlayer();
         }
+    }
+
+    public void StartGameplayRunStage()
+    {
+        if (GameStatus == GameStatusData.GameStatus.GameplayRun)
+            return;
+
+        gameStatus.CurrentStatus = GameStatusData.GameStatus.GameplayRun;
+        NetworkServer.SendToAll(worldData);
+        NetworkServer.SendToAll(gameStatus);
+    }
+
+    public void StartBuildAndConnectStage()
+    {
+        if (GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+            return;
+
+        gameStatus.CurrentStatus = GameStatusData.GameStatus.BuildAndConnect;
+        NetworkServer.SendToAll(gameStatus);
     }
 
     internal void SendSyncToClient(NetworkConnection conn)
     {
-        conn.Send(worldData);
+        //conn.Send(worldData);
         conn.Send(gameStatus);
     }
 }

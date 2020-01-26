@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ServerUIController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class ServerUIController : MonoBehaviour
         if(Net.IsServer)
         {
             rightServerUI = GetComponentInChildren<RightServerUI>();
+            rightServerUI.PlayButton.onClick.AddListener(OnServerStartClick);
+            SetCorrectNameOfServerStartButton();
         }
     }
 
@@ -21,5 +24,35 @@ public class ServerUIController : MonoBehaviour
     {
         rightServerUI.PlayerCountText.text = $"Player Count: {Player.Instances.Count}";
         rightServerUI.ServerPlayerScore.text =  $"Your Score: {ServerScore}";
+    }
+
+    private void OnServerStartClick()
+    {
+        if(GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+        {
+            GameManager.Instance.StartBuildAndConnectStage();
+            SetCorrectNameOfServerStartButton();
+        }
+        else
+        {
+            //use only if some error
+            GameManager.Instance.StartBuildAndConnectStage();
+            SetCorrectNameOfServerStartButton();
+        }
+    }
+
+    private void SetCorrectNameOfServerStartButton()
+    {
+        switch (GameManager.GameStatus)
+        {
+            case GameStatusData.GameStatus.BuildAndConnect:
+                rightServerUI.PlayButton.GetComponentInChildren<TMP_Text>().text = "Start Match";
+                break;
+            case GameStatusData.GameStatus.GameplayRun:
+                rightServerUI.PlayButton.GetComponentInChildren<TMP_Text>().text = "((Runing...))";
+                break;
+            default:
+                break;
+        }
     }
 }
