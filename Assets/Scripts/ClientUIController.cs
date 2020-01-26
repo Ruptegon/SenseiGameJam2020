@@ -29,7 +29,7 @@ public class ClientUIController : MonoBehaviour
     public static float HorizontalInput;
     public static float VertiaclInput;
 
-    private bool onGoal = false;
+    private bool impossibleRunning = false;
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class ClientUIController : MonoBehaviour
 
     private void Update()
     {
-        if (onGoal && GameManager.GameStatus != GameStatusData.GameStatus.BuildAndConnect)
+        if (impossibleRunning && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
         {
             waitingForFinishCanvas.SetActive(true);
             placement.text = "";
@@ -61,6 +61,7 @@ public class ClientUIController : MonoBehaviour
             else if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
             {
                 waitingRoomCanvas.SetActive(false);
+                impossibleRunning = false;
             }
             else
             {
@@ -90,10 +91,10 @@ public class ClientUIController : MonoBehaviour
     }
 
 
-    public void OnGoalChestAchieved()
+    public void OnRuningEnd()
     {
         //TODO: Kacper, ogarnij... jak dojdziemy do końca skrzyni.
-        onGoal = true;
+        impossibleRunning = true;
         Debug.Log("onGoalActive!");
     }
 }

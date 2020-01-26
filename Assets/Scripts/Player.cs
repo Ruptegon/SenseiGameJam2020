@@ -113,6 +113,9 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
             CmdSendEndCommunicat(false);
+
+        AddPlayerWhoFinished(this, true);
+        ClientUIController.Instance.OnRuningEnd();
     }
 
     private void OnEnable()
@@ -135,7 +138,7 @@ public class Player : NetworkBehaviour
     [Command]
     void CmdSendEndCommunicat(bool isAlive)
     {
-        Player.AddPlayerWhoFinished(this, isAlive);
+        AddPlayerWhoFinished(this, isAlive);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -145,8 +148,9 @@ public class Player : NetworkBehaviour
 
         if(other.tag == "GoalChest")
         {
-            ClientUIController.Instance.OnGoalChestAchieved();
+            AddPlayerWhoFinished(this, true);
             CmdSendEndCommunicat(true);
+            ClientUIController.Instance.OnRuningEnd();
         }
     }
 }
