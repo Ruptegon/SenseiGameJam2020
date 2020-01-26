@@ -150,14 +150,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.22614807, g: 0.50482875, b: 0.6226415, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.53266287, g: 0.7550783, b: 0.8490566, a: 1}
+  m_Intensity: 0.48
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.519
@@ -207,13 +207,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724871014}
-  m_LocalRotation: {x: 0.69645137, y: -0.23314464, z: 0.5565223, w: 0.3884354}
+  m_LocalRotation: {x: 0.4784044, y: -0.15295152, z: 0.8585129, w: 0.10339543}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 126.817, y: -82.444, z: -10.343994}
+  m_LocalEulerAnglesHint: {x: 158.805, y: -122.101, z: -1.9169922}
 --- !u!114 &724871017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309160979912566988, guid: f6c5c161bebe4b24da8bd279031ac0e9,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4309160979912566989, guid: f6c5c161bebe4b24da8bd279031ac0e9,
         type: 3}
@@ -386,8 +391,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.22614807, g: 0.50482875, b: 0.6226415, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.5242524, g: 0.6663668, b: 0.7264151, a: 1}
+  m_Intensity: 0.57
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -443,13 +448,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956539478}
-  m_LocalRotation: {x: 0.36143494, y: -0.63934785, z: 0.15353335, w: 0.6610799}
+  m_LocalRotation: {x: -0.64253044, y: -0.57364446, z: 0.50634074, w: 0.04130159}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 137.608, y: 83.87499, z: 159.457}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 148.14, y: 55.273994, z: 293.484}
 --- !u!1001 &2084944916
 PrefabInstance:
   m_ObjectHideFlags: 0

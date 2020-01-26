@@ -46,7 +46,7 @@ public class DungeonKeeper : MonoBehaviour
 
     private void ButtonBat() 
     {
-        toSpawn = GameManager.Builder.Prefabs[0];
+        toSpawn = GameManager.Builder.Prefabs[0].Prefab;
     }
 
 }
