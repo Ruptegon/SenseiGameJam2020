@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DungeonKeeper : MonoBehaviour
 {
     public static DungeonKeeper Instance;
 
     private GameObject toSpawn;
+    private int costOfNext;
+
     private Vector3 spawnLocation;
     private Plane plane;
+
+    private int pointsMax = 100;
+    private int points = 0;
+    [SerializeField] private TextMeshProUGUI textMesh;
 
     private void Awake()
     {
@@ -18,6 +25,8 @@ public class DungeonKeeper : MonoBehaviour
     }
 
     public void SetSelectedPrefab(GameObject prefab) => toSpawn = prefab;
+
+    public void SetCostOfNext(int nextCost) => costOfNext = nextCost;
 
     // Update is called once per frame
     void Update()
@@ -37,12 +46,28 @@ public class DungeonKeeper : MonoBehaviour
                     worldPos += new Vector3(0.5f, 0.5f, 0.5f);
                     if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < 7 && worldPos.z < 30)
                     {
-                        GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z);
+                        if (points + costOfNext < pointsMax)
+                        {
+                            if (GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z))
+                            {
+                                points += costOfNext;
+                                UpdateCost();
+                            }
+                        }
+                        else 
+                        {
+                            //Place message here.
+                        }
                         //Debug.Log("Mouse pos = " + Input.mousePosition);
                         //Debug.Log("World pos = " + worldPos);
                     }
                 }
             }
         }
+    }
+
+    void UpdateCost() 
+    {
+        textMesh.text = (points / pointsMax).ToString();
     }
 }
