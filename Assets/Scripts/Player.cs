@@ -164,6 +164,7 @@ public class Player : NetworkBehaviour
         }
     }
 
+    /*
     private void Update()
     {
         if (GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
@@ -172,4 +173,5 @@ public class Player : NetworkBehaviour
                 GameManager.Instance.StartBuildAndConnectStage(3f);
         }
     }
+    */
 }
