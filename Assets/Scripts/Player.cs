@@ -36,7 +36,7 @@ public class Player : NetworkBehaviour
     public string PlayerName;
 
     private int score = 0;
-    public int Gold
+    public int Score
     {
         get => score;
         set
@@ -121,7 +121,7 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
             CmdSendEndCommunicat(false);
 
-        AddPlayerWhoFinished(this, true);
+        AddPlayerWhoFinished(this, false);
         ClientUIController.Instance.OnRuningEnd();
     }
 
@@ -148,6 +148,7 @@ public class Player : NetworkBehaviour
     void CmdSendEndCommunicat(bool isAlive)
     {
         AddPlayerWhoFinished(this, isAlive);
+        Score += GameManager.GoalChest.GetClientScore();
     }
 
     private void OnTriggerEnter(Collider other)

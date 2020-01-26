@@ -22,7 +22,7 @@ public class ChestScore
         return score;
     }
 
-    public void GiveAllToServer()
+    public void GiveScoreToServer()
     {
         ServerScore += voult;
         voult = 0;

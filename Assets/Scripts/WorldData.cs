@@ -37,7 +37,17 @@ public class WorldData : MessageBase
         }
     }
 
-
+    public void Reset()
+    {
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int z = 0; z < SizeZ; z++)
+            {
+                Map[x, z] = -1;
+                MapPassable[x, z] = true;
+            }
+        }
+    }
 
     public override void Deserialize(NetworkReader reader)
     {

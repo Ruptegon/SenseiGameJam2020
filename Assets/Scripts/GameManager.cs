@@ -92,9 +92,10 @@ public class GameManager : MonoBehaviour
             return;
 
         gameStatus.CurrentStatus = GameStatusData.GameStatus.BuildAndConnect;
+        Builder.CleanAndBuildWorld(worldData);
         NetworkServer.SendToAll(gameStatus);
 
-        GoalChest.GiveAllToServer();
+        GoalChest.GiveScoreToServer();
 
         Debug.Log("StartBuildAndConnectStage");
     }

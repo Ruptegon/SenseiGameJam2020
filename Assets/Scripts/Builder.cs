@@ -27,6 +27,13 @@ public class Builder : MonoBehaviour
     {
         world = worldData;
     }
+
+    public void CleanAndBuildWorld(WorldData data)
+    {
+        data.Reset();
+        BuildWorld(data);
+    }
+
     public void BuildWorld(WorldData data)
     {
         Debug.Log("Clearing world...");
