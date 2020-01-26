@@ -67,4 +67,13 @@ public class Net : NetworkManager
             }
         }
     }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientDisconnect(conn);
+        Application.Quit();
+    }
+
+
+
 }

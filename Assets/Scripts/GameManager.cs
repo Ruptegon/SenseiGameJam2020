@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         gameStatus.CurrentStatus = GameStatusData.GameStatus.GameplayRun;
         NetworkServer.SendToAll(worldData);
         NetworkServer.SendToAll(gameStatus);
+        ServerUIController.instance.ResetMatch();
         Debug.Log("StartGameplayRunStage");
     }
 
