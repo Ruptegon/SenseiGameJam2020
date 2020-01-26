@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static float SyncTimer => (float)Instance.syncTimer.TimeValue;
     public static Builder Builder;
+    public static WorldData World => Instance.worldData;
+
 
     private WorldData worldData = new WorldData(7, 30);
     private SyncTimer syncTimer = new SyncTimer();

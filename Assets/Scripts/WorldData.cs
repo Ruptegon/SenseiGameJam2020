@@ -117,4 +117,18 @@ public class WorldData : MessageBase
 
         return false;
     }
+
+    public bool IsPassable(int positionX, int positionZ)
+    {
+        if (positionX < 0 || positionZ < 0)
+            return false;
+
+        if (positionX > SizeX)
+            return false;
+
+        if (positionZ > SizeZ)
+            return false;
+
+        return MapPassable[positionX, positionZ];
+    }
 }

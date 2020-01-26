@@ -177,6 +177,9 @@ public class PlayerMovement : NetworkBehaviour
     [Command]
     private void CmdMoveTo(int x, int z)
     {
+        if (!GameManager.World.IsPassable(x, z))
+            return;
+
         MoveTo(x, z);
         RpcMoveTo(x, z);
     }
