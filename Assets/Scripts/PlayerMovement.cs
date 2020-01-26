@@ -92,21 +92,23 @@ public class PlayerMovement : NetworkBehaviour
             switch (rot)
             {
                 case Rotation.Forward:
-                    return Vector3.forward;
+                    return new Vector3(0f, 0f, 0f);
                 case Rotation.Backward:
-                    return Vector3.back;
+                    return new Vector3(0f, 90f, 0f);
                 case Rotation.Left:
-                    return Vector3.left;
+                    return new Vector3(0f, 180f, 0f);
                 case Rotation.Right:
-                    return Vector3.right;
+                    return new Vector3(0f, 270f, 0f);
                 default:
-                    return Vector3.forward;
+                    return new Vector3(0f, 0f, 0f);
             }
         }
 
-        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), movementTime);
-        iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), movementTime);
-        animator.speed = 1 / movementTime;
+        var animationMovementTime = movementTime * 0.8f;
+
+        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
+        iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), animationMovementTime);
+        animator.speed = 1 / animationMovementTime;
         animator.SetTrigger("Jump");
     }
 
