@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
 
     public void ResetPlayer()
     {
-        var xPosition = Mathf.CeilToInt(GameManager.World.SizeX / 2f);
+        var xPosition = (int)(GameManager.World.SizeX / 2f);
         transform.position = new Vector3(xPosition, 0f, 0f);
         HP = 3;
     }

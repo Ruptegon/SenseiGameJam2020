@@ -57,7 +57,7 @@ public class Builder : MonoBehaviour
         }
 
         Debug.Log($"Building goal chest...");
-        var xGoalChestPosition = Mathf.CeilToInt(world.SizeX / 2f);
+        var xGoalChestPosition = (int)(GameManager.World.SizeX / 2f);
         runtimeWorldAssets.Add(Instantiate(GoalChestPrefab, new Vector3(xGoalChestPosition, 0f, world.SizeZ), Quaternion.identity, transform));
     }
 
