@@ -123,10 +123,10 @@ public class WorldData : MessageBase
         if (positionX < 0 || positionZ < 0)
             return false;
 
-        if (positionX > SizeX)
+        if (positionX >= SizeX)
             return false;
 
-        if (positionZ > SizeZ)
+        if (positionZ >= SizeZ)
             return false;
 
         return MapPassable[positionX, positionZ];
