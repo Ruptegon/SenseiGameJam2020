@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class ClientUIController : MonoBehaviour
 {
@@ -20,11 +21,15 @@ public class ClientUIController : MonoBehaviour
     [SerializeField] private RawImage heart3;
 
     [SerializeField] private GameObject waitingRoomCanvas;
+    [SerializeField] private GameObject waitingForFinishCanvas;
 
     [SerializeField] private TextMeshProUGUI ranking;
+    [SerializeField] private TextMeshProUGUI placement;
 
     public static float HorizontalInput;
     public static float VertiaclInput;
+
+    private bool onGoal = false;
 
     private void Awake()
     {
@@ -35,34 +40,48 @@ public class ClientUIController : MonoBehaviour
 
     private void Update()
     {
-        if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect) 
+        if (onGoal && GameManager.GameStatus != GameStatusData.GameStatus.BuildAndConnect)
         {
-            return;
-        }
-        else if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
-        {
-            waitingRoomCanvas.SetActive(false);
-        }
-        else 
-        {
-            if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+            placement.text = "";
+            var playersWhoFinished = ServerUIController.instance.playersWhoFinished;
+            for (int i = 0; i < playersWhoFinished.Count; i++)
             {
-                waitingRoomCanvas.SetActive(true);
+                var player = playersWhoFinished[i].Item1;
+                var isAlive = playersWhoFinished[i].Item2 == true ? "" : " [+]";
+                placement.text += i + ". " + player.PlayerName + " - " + player.Gold + " PKT." + isAlive + "\n";
             }
-            if (!Player.LocalPlayer)
+        }
+        else
+        {
+            if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
             {
                 return;
             }
-            Gold.text = Player.LocalPlayer.Gold.ToString();
-            if (Player.LocalPlayer.HP < 3) 
+            else if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
             {
-                heart1.enabled = false;
-                if (Player.LocalPlayer.HP < 2)
+                waitingRoomCanvas.SetActive(false);
+            }
+            else
+            {
+                if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
                 {
-                    heart2.enabled = false;
-                    if (Player.LocalPlayer.HP < 1)
+                    waitingRoomCanvas.SetActive(true);
+                }
+                if (!Player.LocalPlayer)
+                {
+                    return;
+                }
+                Gold.text = Player.LocalPlayer.Gold.ToString();
+                if (Player.LocalPlayer.HP < 3)
+                {
+                    heart1.enabled = false;
+                    if (Player.LocalPlayer.HP < 2)
                     {
-                        heart3.enabled = false;
+                        heart2.enabled = false;
+                        if (Player.LocalPlayer.HP < 1)
+                        {
+                            heart3.enabled = false;
+                        }
                     }
                 }
             }
@@ -73,5 +92,6 @@ public class ClientUIController : MonoBehaviour
     public void OnGoalChestAchieved()
     {
         //TODO: Kacper, ogarnij... jak dojdziemy do końca skrzyni.
+        onGoal = true;
     }
 }

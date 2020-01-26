@@ -10,7 +10,7 @@ public class ServerUIController : MonoBehaviour
 
     [SerializeField] RightServerUI rightServerUI;
 
-    Dictionary<Player, bool> playersWhoFinished = new Dictionary<Player, bool>();
+    public List<(Player, bool)> playersWhoFinished = new List<(Player, bool)>();
 
     public void ResetMatch()
     {
@@ -25,10 +25,10 @@ public class ServerUIController : MonoBehaviour
             return;
         }
 
-        if (playersWhoFinished.ContainsKey(player))
+        if (playersWhoFinished.Contains((player, true)) || playersWhoFinished.Contains((player, false)))
             Debug.LogError("Something is wrong! Dictionary shoudn't contains this element");
 
-        playersWhoFinished.Add(player, wasAlive);
+        playersWhoFinished.Add((player, wasAlive));
     }
 
     private void Awake()
