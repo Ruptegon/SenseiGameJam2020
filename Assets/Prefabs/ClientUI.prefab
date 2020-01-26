@@ -1697,8 +1697,11 @@ MonoBehaviour:
   DownArrow: {fileID: 5964892409271388734}
   RightArrow: {fileID: 3135441651787730044}
   LeftArrow: {fileID: 1561180819344080756}
-  Gold: {fileID: 0}
-  Ranking: {fileID: 0}
+  Gold: {fileID: 1853026586088393547}
+  Ranking: {fileID: 7617384153529974228}
+  heart1: {fileID: 4830848292528879468}
+  heart2: {fileID: 1921328851148573937}
+  heart3: {fileID: 7369784302129212234}
 --- !u!1 &6956215780659147188
 GameObject:
   m_ObjectHideFlags: 0

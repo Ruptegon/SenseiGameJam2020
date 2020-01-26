@@ -16,6 +16,10 @@ public class ClientUIController : MonoBehaviour
     [SerializeField] public Button LeftArrow;
     [SerializeField] private TextMeshProUGUI Gold;
     [SerializeField] private TextMeshProUGUI Ranking;
+    [SerializeField] private RawImage heart1;
+    [SerializeField] private RawImage heart2;
+    [SerializeField] private RawImage heart3;
+
 
     public static float HorizontalInput;
     public static float VertiaclInput;
@@ -34,5 +38,17 @@ public class ClientUIController : MonoBehaviour
             return;
         }
         Gold.text = Player.LocalPlayer.gold.ToString();
+        if (Player.LocalPlayer.GetHp() < 3) 
+        {
+            heart1.enabled = false;
+            if (Player.LocalPlayer.GetHp() < 2)
+            {
+                heart2.enabled = false;
+                if (Player.LocalPlayer.GetHp() < 1)
+                {
+                    heart3.enabled = false;
+                }
+            }
+        }
     }
 }

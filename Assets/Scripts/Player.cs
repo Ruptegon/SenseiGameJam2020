@@ -42,6 +42,11 @@ public class Player : NetworkBehaviour
         hp = 0;
     }
 
+    public int GetHp() 
+    {
+        return hp;
+    }
+
     public void Update()
     {
         if (hp <= 0) 
