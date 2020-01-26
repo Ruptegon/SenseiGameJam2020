@@ -30,7 +30,7 @@ public class ServerUIController : MonoBehaviour
     {
         if(GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
         {
-            GameManager.Instance.StartBuildAndConnectStage();
+            GameManager.Instance.StartGameplayRunStage();
             SetCorrectNameOfServerStartButton();
         }
         else
