@@ -12,8 +12,9 @@ public class PlayerMovement : NetworkBehaviour
 
     enum Rotation { Forward, Backward, Left, Right };
     private Rotation currentRotation = Rotation.Forward;
-    private float movementTime = 0.2f;
-    private float animationMovementTime => movementTime * 0.8f;
+    private float movementTime = 0.3f;
+    //private float animationMovementTime => movementTime;//* 0.8f;
+    private float animationMovementTime = 0.3f;
     private bool isMoving = false;
 
     public void ResetPlayer()
