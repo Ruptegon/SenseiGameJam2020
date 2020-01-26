@@ -56,13 +56,14 @@ public class Net : NetworkManager
         {
             if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
             {
-                //Sprawn player!
+                
                 GameManager.Instance.SendSyncToClient(conn);
                 Debug.Log($"Client {conn.address} joined to game!");
             }
             else
             {
                 Debug.Log($"Client {conn.address} wanted join to game but was disconnected!");
+                conn.Disconnect();
             }
         }
     }

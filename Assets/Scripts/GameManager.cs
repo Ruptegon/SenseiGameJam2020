@@ -51,6 +51,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnGameStatusSynced()
+    {
+        if(GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+        {
+            if (!Player.LocalPlayer)
+            {
+                ClientScene.AddPlayer();
+            }
+        }
+        else if(GameStatus == GameStatusData.GameStatus.GameplayRun)
+        {
+
+        }
+    }
 
     internal void SendSyncToClient(NetworkConnection conn)
     {

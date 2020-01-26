@@ -22,10 +22,6 @@ public class GameStatusData : MessageBase
 
     public void RegisterHandler()
     {
-        if (Net.IsServer)
-        {
-
-        }
         if (Net.IsClient)
         {
             if (!NetworkServer.active)
@@ -36,5 +32,6 @@ public class GameStatusData : MessageBase
     public void OnGameStatusSync(NetworkConnection conn, GameStatusData msg)
     {
         CurrentStatus = msg.CurrentStatus;
+        GameManager.Instance.OnGameStatusSynced();
     }
 }
