@@ -196,11 +196,11 @@ public class PlayerMovement : NetworkBehaviour
                 case Rotation.Forward:
                     return new Vector3(0f, 0f, 0f);
                 case Rotation.Backward:
-                    return new Vector3(0f, 90f, 0f);
-                case Rotation.Left:
                     return new Vector3(0f, 180f, 0f);
+                case Rotation.Left:
+                    return new Vector3(0f, 270, 0f);
                 case Rotation.Right:
-                    return new Vector3(0f, 270f, 0f);
+                    return new Vector3(0f, 90, 0f);
                 default:
                     return new Vector3(0f, 0f, 0f);
             }
