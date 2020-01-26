@@ -49,7 +49,7 @@ public class ClientUIController : MonoBehaviour
             {
                 var player = playersWhoFinished[i].Item1;
                 var isAlive = playersWhoFinished[i].Item2 == true ? "" : " [+]";
-                placement.text += i + ". " + player.PlayerName + " - " + player.Gold + " PKT." + isAlive + "\n";
+                placement.text += i + ". " + player.PlayerName + " - " + player.Gold + " Pnts." + isAlive + "\n";
             }
         }
         else
@@ -94,5 +94,6 @@ public class ClientUIController : MonoBehaviour
     {
         //TODO: Kacper, ogarnij... jak dojdziemy do końca skrzyni.
         onGoal = true;
+        Debug.Log("onGoalActive!");
     }
 }
