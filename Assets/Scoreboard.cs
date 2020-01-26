@@ -9,6 +9,8 @@ public class Scoreboard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scores;
 
     private int playersCount = 0;
+    private bool needToUpdate = false;
+
 
     private void PrepareRanking()
     {
@@ -32,14 +34,18 @@ public class Scoreboard : MonoBehaviour
 
         for (int i = 0; i < players.Count; i++)
         {
+            if (string.IsNullOrEmpty(players[i].PlayerName))
+                needToUpdate = true;
+
             scores.text += i + ". " + players[i].PlayerName + " - " + players[i].Gold + " PKT.\n";
         }
     }
 
     public void Update()
     {
-        if (playersCount != Player.Instances.Count) 
+        if (playersCount != Player.Instances.Count || needToUpdate) 
         {
+            needToUpdate = false;
             playersCount = Player.Instances.Count;
             PrepareRanking();
         }
