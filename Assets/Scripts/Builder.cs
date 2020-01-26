@@ -32,6 +32,7 @@ public class Builder : MonoBehaviour
     {
         data.Reset();
         BuildWorld(data);
+        OnWorldRebuild.Invoke();
     }
 
     public void BuildWorld(WorldData data)
