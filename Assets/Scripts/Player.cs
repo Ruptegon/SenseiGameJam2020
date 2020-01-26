@@ -122,10 +122,9 @@ public class Player : NetworkBehaviour
         if (Net.IsServer || !isLocalPlayer)
             return;
 
-        Debug.Log("OnTriggerEnter");
-
         if(other.tag == "GoalChest")
         {
+            ClientUIController.Instance.OnGoalChestAchieved();
             CmdSendEndCommunicat(true);
         }
     }

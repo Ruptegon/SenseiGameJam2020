@@ -68,4 +68,10 @@ public class ClientUIController : MonoBehaviour
             }
         }
     }
+
+
+    public void OnGoalChestAchieved()
+    {
+
+    }
 }
