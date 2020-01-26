@@ -5,8 +5,8 @@ using UnityEngine;
 public class TurtlePatrol : MonoBehaviour
 {
     [SerializeField] AnimationCurve positionX;
-    [SerializeField] AnimationCurve positionZ;
     [SerializeField] AnimationCurve positionY;
+    [SerializeField] AnimationCurve positionZ;
     [SerializeField] AnimationCurve rotationY;
 
     Vector3 startPosition;
