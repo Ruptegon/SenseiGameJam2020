@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         {
             Player.LocalPlayer.ResetPlayer();
         }
+        Debug.Log("GameStatus " + GameStatus);
     }
 
     public void StartGameplayRunStage()
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
         gameStatus.CurrentStatus = GameStatusData.GameStatus.GameplayRun;
         NetworkServer.SendToAll(worldData);
         NetworkServer.SendToAll(gameStatus);
+        Debug.Log("StartGameplayRunStage");
     }
 
     public void StartBuildAndConnectStage()
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
 
         gameStatus.CurrentStatus = GameStatusData.GameStatus.BuildAndConnect;
         NetworkServer.SendToAll(gameStatus);
+        Debug.Log("StartBuildAndConnectStage");
     }
 
     internal void SendSyncToClient(NetworkConnection conn)
