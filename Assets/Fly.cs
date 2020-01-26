@@ -10,7 +10,11 @@ public class Fly : MonoBehaviour
 
     private void Start()
     {
-        direction = GetComponentInParent<ArrowSpit>().Direction;
+        var arrowSpit = GetComponentInParent<ArrowSpit>();
+        if (arrowSpit) 
+        {
+            direction = arrowSpit.Direction;
+        }
 
         switch (direction)
         {
