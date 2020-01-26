@@ -30,12 +30,44 @@ public class PlayerMovement : NetworkBehaviour
 
     private void LeftRotate()
     {
-        throw new NotImplementedException();
+        Rotation GetRotation()
+        {
+            switch (currentRotation)
+            {
+                case Rotation.Forward:
+                    return Rotation.Left;
+                case Rotation.Backward:
+                    return Rotation.Right;
+                case Rotation.Left:
+                    return Rotation.Backward;
+                case Rotation.Right:
+                    return Rotation.Forward;
+                default:
+                    return Rotation.Right;
+            }
+        }
+        CmdRotateTo((int)GetRotation());
     }
 
     private void RightRotate()
     {
-        throw new NotImplementedException();
+        Rotation GetRotation()
+        {
+            switch (currentRotation)
+            {
+                case Rotation.Forward:
+                    return Rotation.Right;
+                case Rotation.Backward:
+                    return Rotation.Left;
+                case Rotation.Left:
+                    return Rotation.Forward;
+                case Rotation.Right:
+                    return Rotation.Backward;
+                default:
+                    return Rotation.Right;
+            }
+        }
+        CmdRotateTo((int)GetRotation());
     }
 
     private void MoveBackwardLocal()
