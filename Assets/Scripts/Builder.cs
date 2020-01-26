@@ -55,6 +55,10 @@ public class Builder : MonoBehaviour
                 InstantiateObject(prefabId, x, z);
             }
         }
+
+        Debug.Log($"Building goal chest...");
+        var xGoalChestPosition = Mathf.CeilToInt(world.SizeX / 2f);
+        runtimeWorldAssets.Add(Instantiate(GoalChestPrefab, new Vector3(xGoalChestPosition, 0f, world.SizeZ), Quaternion.identity, transform));
     }
 
     private void InstantiateObject(int prefabId, int positionX, int positionZ)
@@ -85,7 +89,7 @@ public class Builder : MonoBehaviour
         var length = Prefabs.Count;
         for (int i = 0; i < length; i++)
         {
-            if(Prefabs[i].Prefab == prefab)
+            if (Prefabs[i].Prefab == prefab)
             {
                 return i;
             }
