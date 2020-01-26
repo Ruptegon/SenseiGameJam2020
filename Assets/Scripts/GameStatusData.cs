@@ -12,12 +12,18 @@ public class GameStatusData : MessageBase
 
     public override void Deserialize(NetworkReader reader)
     {
-        CurrentStatus = (GameStatus)reader.ReadInt16();
+        if (reader.ReadBoolean())
+            CurrentStatus = GameStatus.GameplayRun;
+        else
+            CurrentStatus = GameStatus.BuildAndConnect;
     }
 
     public override void Serialize(NetworkWriter writer)
     {
-        writer.WriteInt16((short)CurrentStatus);
+        if (CurrentStatus == GameStatus.BuildAndConnect)
+            writer.WriteBoolean(false);
+        else
+            writer.WriteBoolean(true);
     }
 
     public void RegisterHandler()

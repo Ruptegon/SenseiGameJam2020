@@ -69,6 +69,6 @@ public class GameManager : MonoBehaviour
     internal void SendSyncToClient(NetworkConnection conn)
     {
         conn.Send(worldData);
-        //conn.Send(gameStatus);
+        conn.Send(gameStatus);
     }
 }
