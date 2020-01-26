@@ -27,6 +27,7 @@ public class DungeonKeeper : MonoBehaviour
     private void Start()
     {
         GameManager.Builder.OnWorldRebuild.AddListener(OnWorldRebuild);
+        textMesh.text = $"{points}/{pointsMax}";
     }
 
     public void SetSelectedPrefab(GameObject prefab) => toSpawn = prefab;
@@ -73,7 +74,7 @@ public class DungeonKeeper : MonoBehaviour
 
     void UpdateCost() 
     {
-        textMesh.text = (points / pointsMax).ToString();
+        textMesh.text = $"{points}/{pointsMax}";
     }
 
     void OnWorldRebuild() 
