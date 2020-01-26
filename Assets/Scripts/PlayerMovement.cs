@@ -177,6 +177,19 @@ public class PlayerMovement : NetworkBehaviour
         currentRotation = (Rotation)rotation;
         iTween.RotateTo(gameObject, GetRotation(currentRotation), animationMovementTime);
     }
+
+    [Command]
+    private void CmdRotateTo(int rotation)
+    {
+        RotateTo(rotation);
+        RpcRotateTo(rotation);
+    }
+
+    [ClientRpc]
+    private void RpcRotateTo(int rotation)
+    {
+        RotateTo(rotation);
+    }
 }
 
 
