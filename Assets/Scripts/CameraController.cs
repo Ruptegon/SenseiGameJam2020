@@ -23,6 +23,8 @@ public class CameraController : MonoBehaviour
         }
         else 
         {
+            this.gameObject.SetActive(false);
+            /*
             if (!Player.LocalPlayer)
             {
                 return;
@@ -33,6 +35,7 @@ public class CameraController : MonoBehaviour
 
             transform.position = new Vector3(xPosition, playerPosition.y + yPlayerOffset, playerPosition.z + zPlayerOffset);
             transform.LookAt(new Vector3(xPosition, playerPosition.y, playerPosition.z), Vector3.up);
+            */    
         }
         
     }
