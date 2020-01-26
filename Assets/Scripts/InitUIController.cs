@@ -27,6 +27,6 @@ public class InitUIController : MonoBehaviour
             Net.instance.PlayGame(address);
 
         if (!string.IsNullOrEmpty(playerName))
-            Player.PlayerName = playerName;
+            Player.LocalPlayerName = playerName;
     }
 }

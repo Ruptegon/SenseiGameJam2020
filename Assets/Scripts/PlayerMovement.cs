@@ -11,7 +11,9 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Animator animator;
 
     enum Rotation { Forward, Backward, Left, Right };
+    private Rotation currentRotation = Rotation.Forward;
     private float movementTime = 0.2f;
+    private float animationMovementTime => movementTime * 0.8f;
     private bool isMoving = false;
 
     public override void OnStartLocalPlayer()
@@ -19,10 +21,62 @@ public class PlayerMovement : NetworkBehaviour
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
         {
-            ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForward);
-            ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackward);
-            ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeft);
-            ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRight);
+            ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForwardLocal);
+            ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackwardLocal);
+            ClientUIController.Instance.LeftArrow.onClick.AddListener(LeftRotate);
+            ClientUIController.Instance.RightArrow.onClick.AddListener(RightRotate);
+        }
+    }
+
+    private void LeftRotate()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void RightRotate()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void MoveBackwardLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveBackward();
+                break;
+            case Rotation.Backward:
+                MoveForward();
+                break;
+            case Rotation.Left:
+                MoveRight();
+                break;
+            case Rotation.Right:
+                MoveLeft();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveForwardLocal()
+    {
+        switch (currentRotation)
+        {
+            case Rotation.Forward:
+                MoveForward();
+                break;
+            case Rotation.Backward:
+                MoveBackward();
+                break;
+            case Rotation.Left:
+                MoveLeft();
+                break;
+            case Rotation.Right:
+                MoveRight();
+                break;
+            default:
+                break;
         }
     }
 
@@ -42,8 +96,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition + 1, zPosition, (int)Rotation.Right);
-
+        CmdMoveTo(xPosition + 1, zPosition);
     }
 
     private void MoveLeft()
@@ -55,8 +108,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition - 1, zPosition, (int)Rotation.Left);
-
+        CmdMoveTo(xPosition - 1, zPosition);
     }
 
     private void MoveBackward()
@@ -68,8 +120,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition, zPosition - 1, (int)Rotation.Backward);
-
+        CmdMoveTo(xPosition, zPosition - 1);
     }
 
     private void MoveForward()
@@ -81,46 +132,63 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition, zPosition + 1, (int)Rotation.Forward);
-
+        CmdMoveTo(xPosition, zPosition + 1);
     }
 
-    private void MoveTo(int x, int z, int rotation)
+    private void MoveTo(int x, int z)
+    {
+        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
+        animator.speed = 1 / animationMovementTime;
+        animator.SetTrigger("Jump");
+    }
+
+    [Command]
+    private void CmdMoveTo(int x, int z)
+    {
+        MoveTo(x, z);
+        RpcMoveTo(x, z);
+    }
+
+    [ClientRpc]
+    private void RpcMoveTo(int x, int z)
+    {
+        MoveTo(x, z);
+    }
+
+    private void RotateTo(int rotation)
     {
         Vector3 GetRotation(Rotation rot)
         {
             switch (rot)
             {
                 case Rotation.Forward:
-                    return Vector3.forward;
+                    return new Vector3(0f, 0f, 0f);
                 case Rotation.Backward:
-                    return Vector3.back;
+                    return new Vector3(0f, 90f, 0f);
                 case Rotation.Left:
-                    return Vector3.left;
+                    return new Vector3(0f, 180f, 0f);
                 case Rotation.Right:
-                    return Vector3.right;
+                    return new Vector3(0f, 270f, 0f);
                 default:
-                    return Vector3.forward;
+                    return new Vector3(0f, 0f, 0f);
             }
         }
 
-        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), movementTime);
-        iTween.RotateTo(gameObject, GetRotation((Rotation)rotation), movementTime);
-        animator.speed = 1 / movementTime;
-        animator.SetTrigger("Jump");
+        currentRotation = (Rotation)rotation;
+        iTween.RotateTo(gameObject, GetRotation(currentRotation), animationMovementTime);
     }
 
     [Command]
-    private void CmdMoveTo(int x, int z, int rotation)
+    private void CmdRotateTo(int rotation)
     {
-        MoveTo(x, z, rotation);
-        RpcMoveTo(x, z, rotation);
+        RotateTo(rotation);
+        RpcRotateTo(rotation);
     }
 
     [ClientRpc]
-    private void RpcMoveTo(int x, int z, int rotation)
+    private void RpcRotateTo(int rotation)
     {
-        MoveTo(x, z, rotation);
+        RotateTo(rotation);
     }
 }
 

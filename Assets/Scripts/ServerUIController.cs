@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ServerUIController : MonoBehaviour
 {
+    public static int ServerScore = 0;
+
     [SerializeField] RightServerUI rightServerUI;
 
     private void Awake()
@@ -15,5 +17,9 @@ public class ServerUIController : MonoBehaviour
         }
     }
 
-
+    private void Update()
+    {
+        rightServerUI.PlayerCountText.text = $"Player Count: {Player.Instances.Count}";
+        rightServerUI.ServerPlayerScore.text =  $"Your Score: {ServerScore}";
+    }
 }
