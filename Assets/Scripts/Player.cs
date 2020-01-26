@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using System;
 
 public class Player : NetworkBehaviour
 {
     public static List<Player> Instances = new List<Player>();
 
     public static string LocalPlayerName = "default";
+
     public static Player LocalPlayer;
 
     [SerializeField] Transform cameraTarget;
@@ -17,9 +19,35 @@ public class Player : NetworkBehaviour
 
     public string PlayerName;
 
-    public int HP = 3;
-    public int Gold = 0;
+    private int score = 0;
+    public int Gold
+    {
+        get => score;
+        set
+        {
+            if (Net.IsServer)
+            {
+                score = value;
+                RpcChangeScoreValue(value);
+            }
+            else if (isLocalPlayer)
+            {
+                CmdChangeScoreValue(value);
+            }
+        }
+    }
 
+    private int hp = 3;
+    public int HP
+    {
+        get => hp;
+        set
+        {
+            hp = value;
+            if (hp < 0)
+                OnDeath();
+        }
+    }
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -43,22 +71,27 @@ public class Player : NetworkBehaviour
         PlayerName = name;
     }
 
+    [Command]
+    public void CmdChangeScoreValue(int value)
+    {
+        score = value;
+        RpcChangeScoreValue(value);
+    }
+
+    [ClientRpc]
+    public void RpcChangeScoreValue(int value)
+    {
+        score = value;
+    }
+
     public void Damage() => HP--;
     public void Heal() => HP++;
     public void Kill() => HP = 0;
 
-
-    public void Update()
+    public void OnDeath()
     {
-        if (HP <= 0)
-        {
-            RoundOver();
-        }
-    }
-
-    public void RoundOver()
-    {
-
+        if (isLocalPlayer)
+            CmdSendEndCommunicat(false);
     }
 
     private void OnEnable()
@@ -76,5 +109,11 @@ public class Player : NetworkBehaviour
         var xPosition = (int)(GameManager.World.SizeX / 2f);
         transform.position = new Vector3(xPosition, 0f, 0f);
         HP = 3;
+    }
+
+    [Command]
+    void CmdSendEndCommunicat(bool isAlive)
+    {
+
     }
 }
