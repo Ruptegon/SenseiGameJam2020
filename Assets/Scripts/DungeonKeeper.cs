@@ -9,11 +9,12 @@ public class DungeonKeeper : MonoBehaviour
 
     private GameObject toSpawn;
     private Vector3 spawnLocation;
-    private Plane plane = new Plane(Vector3.up, Camera.main.transform.position.y);
+    private Plane plane;
 
     private void Awake()
     {
         Instance = this;
+        plane = new Plane(Vector3.up, Camera.main.transform.position.y);
     }
 
     public void SetSelectedPrefab(GameObject prefab) => toSpawn = prefab;
