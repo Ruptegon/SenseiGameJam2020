@@ -5,19 +5,34 @@ using UnityEngine;
 public class SpitFire : MonoBehaviour
 {
     [SerializeField] GameObject fireball;
-    private float delay = 4;
-    private float time = 0;
-    private float previousTime = 0;
 
-    // Update is called once per frame
+    private List<GameObject> childs;
+
+    private int secondDelay = 4;
+    int secondTimer;
+
+    private void Start()
+    {
+        secondTimer = Mathf.CeilToInt(GameManager.SyncTimer);
+    }
+
     void Update()
     {
-        time += ((float)GameManager.SyncTimer - previousTime);
-        if (time >= delay) 
+        if(GameManager.SyncTimer > secondTimer + secondDelay)
         {
-            time = 0;
-            Instantiate<GameObject>(fireball, this.transform.position + this.transform.forward, Quaternion.identity);
+            secondTimer += secondDelay;
+            Run();
         }
-        previousTime = (float)GameManager.SyncTimer;
+    }
+
+    private void Run()
+    {
+        var obj = Instantiate<GameObject>(fireball, this.transform.position + this.transform.forward, Quaternion.identity);
+        childs.Add(obj);
+    }
+
+    private void OnDestroy()
+    {
+        childs.ForEach(x => Destroy(x.gameObject));
     }
 }
