@@ -23,7 +23,7 @@ public class Scoreboard : MonoBehaviour
         {
             for (int j = 0; j < players.Count; j++)
             {
-                if (players[i].Gold < players[j].Gold)
+                if (players[i].Score < players[j].Score)
                 {
                     Player save = players[i];
                     players[i] = players[j];
@@ -37,7 +37,7 @@ public class Scoreboard : MonoBehaviour
             if (string.IsNullOrEmpty(players[i].PlayerName))
                 needToUpdate = true;
 
-            scores.text += i + ". " + players[i].PlayerName + " - " + players[i].Gold + " Pnts.\n";
+            scores.text += i + ". " + players[i].PlayerName + " - " + players[i].Score + " Pnts.\n";
         }
     }
 

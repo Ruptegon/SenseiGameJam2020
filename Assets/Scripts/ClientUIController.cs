@@ -49,13 +49,15 @@ public class ClientUIController : MonoBehaviour
             {
                 var player = playersWhoFinished[i].Item1;
                 var isAlive = playersWhoFinished[i].Item2 == true ? "" : " [+]";
-                placement.text += i + ". " + player.PlayerName + " - " + player.Gold + " Pnts." + isAlive + "\n";
+                placement.text += i + ". " + player.PlayerName + " - " + player.Score + " Pnts." + isAlive + "\n";
             }
         }
         else
         {
             if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
             {
+                waitingForFinishCanvas.SetActive(false);
+                impossibleRunning = false;
                 return;
             }
             else if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
@@ -67,12 +69,10 @@ public class ClientUIController : MonoBehaviour
                 if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
                 {
                     waitingRoomCanvas.SetActive(true);
-                    waitingForFinishCanvas.SetActive(false);
-                    impossibleRunning = false;
                 }
                 if (Player.LocalPlayer)
                 {
-                    Gold.text = Player.LocalPlayer.Gold.ToString();
+                    Gold.text = Player.LocalPlayer.Score.ToString();
                     if (Player.LocalPlayer.HP < 3)
                     {
                         heart1.enabled = false;
