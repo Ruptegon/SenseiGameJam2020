@@ -19,9 +19,13 @@ public class CameraController : MonoBehaviour
     {
         if (Net.IsClient)
         {
-            var cameraTarget = Player.LocalPlayer.CameraTarget;
-            transform.position = cameraTarget.position;
-            transform.rotation = cameraTarget.rotation;
+            var cameraTarget = Player.LocalPlayer?.CameraTarget;
+
+            if (cameraTarget)
+            {
+                transform.position = cameraTarget.position;
+                transform.rotation = cameraTarget.rotation;
+            }
         }
         else if (Net.IsServer)
         {
