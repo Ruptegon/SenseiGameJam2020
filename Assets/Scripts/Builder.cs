@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Builder : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Builder : MonoBehaviour
     public GameObject FloorPrefab;
     public GameObject GoalChestPrefab;
     public List<SyncPrefab> Prefabs;
+
+    public UnityEvent OnWorldRebuild = new UnityEvent();
 
     private WorldData world; //referencje to main world data, set in Init by GameManager
 

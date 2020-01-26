@@ -20,6 +20,7 @@ public class ShopButton : MonoBehaviour
     private void OnClickButton()
     {
         DungeonKeeper.Instance.SetSelectedPrefab(prefab);
+        DungeonKeeper.Instance.SetCostOfNext(cost);
     }
 
 }
