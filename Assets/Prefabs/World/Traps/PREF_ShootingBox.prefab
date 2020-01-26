@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 6769148452372772732, guid: 9b0dacd911bea924f9bd2e254d0daa26, type: 3}
+  Direction: 0
 --- !u!1 &1905337515291299316
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 6769148452372772732, guid: 9b0dacd911bea924f9bd2e254d0daa26, type: 3}
+  Direction: 3
 --- !u!1 &4015337338080159078
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 6769148452372772732, guid: 9b0dacd911bea924f9bd2e254d0daa26, type: 3}
+  Direction: 1
 --- !u!1 &5772407944699409217
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 6769148452372772732, guid: 9b0dacd911bea924f9bd2e254d0daa26, type: 3}
+  Direction: 2
 --- !u!1001 &4867417250108966471
 PrefabInstance:
   m_ObjectHideFlags: 0
