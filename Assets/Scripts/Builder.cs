@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
+    [Serializable]
+    public class SyncPrefab
+    {
+        public GameObject Prefab;
+        public bool Passable;
+    }
+
+
     public GameObject FloorPrefab;
-    public List<GameObject> Prefabs;
+    public List<SyncPrefab> Prefabs;
 
     private WorldData world; //referencje to main world data, set in Init by GameManager
 
@@ -57,7 +65,7 @@ public class Builder : MonoBehaviour
 
 
 
-        runtimeWorldAssets.Add(Instantiate(Prefabs[prefabId], new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform));
+        runtimeWorldAssets.Add(Instantiate(Prefabs[prefabId].Prefab, new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform));
     }
 
     public bool BuildObject(GameObject prefab, int positionX, int positionZ)
@@ -66,11 +74,23 @@ public class Builder : MonoBehaviour
             return false;
 
         runtimeWorldAssets.Add(Instantiate(prefab, new Vector3(positionX, 0, positionZ), Quaternion.identity, transform));
-        var prefabId = Prefabs.IndexOf(prefab);
+        var prefabId = GetPrefabId(prefab);
         world.AddObject(prefabId, positionX, positionZ);
         return true;
     }
 
+    public int GetPrefabId(GameObject prefab)
+    {
+        var length = Prefabs.Count;
+        for (int i = 0; i < length; i++)
+        {
+            if(Prefabs[i].Prefab == prefab)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 }
