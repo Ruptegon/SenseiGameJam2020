@@ -12,6 +12,9 @@ public class Player : NetworkBehaviour
     public static string LocalPlayerName = "default";
     public static Player LocalPlayer;
 
+    [SerializeField] Transform cameraTarget;
+    public Transform CameraTarget => cameraTarget;
+
     public string PlayerName;
 
     public int HP = 3;

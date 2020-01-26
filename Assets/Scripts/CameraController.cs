@@ -9,11 +9,6 @@ public class CameraController : MonoBehaviour
     float movementSpeed = 5f;
     float xRotation = 80f;
 
-    private void Awake()
-    {
-        gameObject.SetActive(Net.IsServer);
-    }
-
     private void Start()
     {
         transform.position = new Vector3(xPosition, yPosition, transform.position.z);
@@ -22,9 +17,15 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Net.IsServer) 
+        if (Net.IsClient)
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) 
+            var cameraTarget = Player.LocalPlayer.CameraTarget;
+            transform.position = cameraTarget.position;
+            transform.rotation = cameraTarget.rotation;
+        }
+        else if (Net.IsServer)
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 transform.position = new Vector3(xPosition, yPosition, transform.position.z + movementSpeed * Time.deltaTime);
             }
@@ -33,5 +34,6 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector3(xPosition, yPosition, transform.position.z - movementSpeed * Time.deltaTime);
             }
         }
+
     }
 }
