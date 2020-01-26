@@ -75,7 +75,8 @@ public class Builder : MonoBehaviour
 
         runtimeWorldAssets.Add(Instantiate(prefab, new Vector3(positionX, 0, positionZ), Quaternion.identity, transform));
         var prefabId = GetPrefabId(prefab);
-        world.AddObject(prefabId, positionX, positionZ);
+        var passable = Prefabs[prefabId].Passable;
+        world.AddObject(prefabId, passable, positionX, positionZ);
         return true;
     }
 
