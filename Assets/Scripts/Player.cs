@@ -114,6 +114,19 @@ public class Player : NetworkBehaviour
     [Command]
     void CmdSendEndCommunicat(bool isAlive)
     {
+        ServerUIController.instance.AddPlayerWhoFinished(this, isAlive);
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Net.IsServer || !isLocalPlayer)
+            return;
+
+        Debug.Log("OnTriggerEnter");
+
+        if(other.tag == "GoalChest")
+        {
+            CmdSendEndCommunicat(true);
+        }
     }
 }

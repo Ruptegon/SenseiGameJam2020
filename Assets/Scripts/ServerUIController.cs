@@ -6,11 +6,35 @@ using TMPro;
 public class ServerUIController : MonoBehaviour
 {
     public static int ServerScore = 0;
+    public static ServerUIController instance;
 
     [SerializeField] RightServerUI rightServerUI;
 
+    Dictionary<Player, bool> playersWhoFinished = new Dictionary<Player, bool>();
+
+    public void ResetMatch()
+    {
+        playersWhoFinished.Clear();
+    }
+
+    public void AddPlayerWhoFinished(Player player, bool wasAlive)
+    {
+        if(Net.IsClient)
+        {
+            Debug.LogWarning("Should be invoke only on server!");
+            return;
+        }
+
+        if (playersWhoFinished.ContainsKey(player))
+            Debug.LogError("Something is wrong! Dictionary shoudn't contains this element");
+
+        playersWhoFinished.Add(player, wasAlive);
+    }
+
     private void Awake()
     {
+        instance = this;
+
         gameObject.SetActive(Net.IsServer);
         if(Net.IsServer)
         {
