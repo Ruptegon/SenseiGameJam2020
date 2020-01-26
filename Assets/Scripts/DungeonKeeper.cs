@@ -79,7 +79,8 @@ public class DungeonKeeper : MonoBehaviour
 
     void OnWorldRebuild() 
     {
-        points = pointsMax;
+        points = 0;
         toSpawn = null;
+        UpdateCost();
     }
 }
