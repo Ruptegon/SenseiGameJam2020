@@ -10,7 +10,7 @@ public class WorldData : MessageBase
     public int SizeZ;
 
     public int[,] Map;
-    public bool[,] MapPassable;
+    public bool[,] MapPassable; //not synced
 
     public WorldData()
     {
@@ -51,7 +51,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 Map[x, z] = reader.ReadInt32();
-                MapPassable[x, z] = reader.ReadBoolean();
+                //MapPassable[x, z] = reader.ReadBoolean();
                 //Debug.Log($"[{x},{z}] = {Map[x,z]}");
             }
         }
@@ -70,7 +70,7 @@ public class WorldData : MessageBase
             for (int z = 0; z < SizeZ; z++)
             {
                 writer.WriteInt32(Map[x, z]);
-                writer.WriteBoolean(MapPassable[x, z]);
+                //writer.WriteBoolean(MapPassable[x, z]);
                 //Debug.Log($"[{x},{z}] = {Map[x, z]}");
             }
         }
