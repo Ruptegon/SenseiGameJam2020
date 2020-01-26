@@ -12,11 +12,13 @@ public class ChestScore
     public void Init(int playerCount)
     {
         voult = IntPow(2, (uint)(playerCount + 3));
+        visitors = 0;
         Debug.Log($"ChestScore initiated by {playerCount} players!");
     }
 
     public int GetClientScore()
     {
+        visitors++;
         var score = (int)(voult / 2f);
         voult -= score;
         return score;
@@ -24,7 +26,8 @@ public class ChestScore
 
     public void GiveScoreToServer()
     {
-        ServerScore += voult;
+        if(visitors != 0)
+            ServerScore += voult;
         voult = 0;
     }
 
