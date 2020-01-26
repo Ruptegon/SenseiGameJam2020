@@ -71,7 +71,7 @@ public class Net : NetworkManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
-        Debug.Log("Disconnect client!");
+        Application.Quit();
     }
 
 
