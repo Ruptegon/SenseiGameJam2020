@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static float SyncTimer => (float)Instance.syncTimer.TimeValue;
     public static Builder Builder;
 
-    private WorldData worldData = new WorldData(11, 50);
+    private WorldData worldData = new WorldData(7, 30);
     private SyncTimer syncTimer = new SyncTimer();
 
 

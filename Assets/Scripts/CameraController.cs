@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float xPosition = 5;
+    [SerializeField] float xPosition = 3;
     [SerializeField] float yPlayerOffset = 15;
     [SerializeField] float zPlayerOffset = -10;
 
