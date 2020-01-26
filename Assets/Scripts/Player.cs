@@ -12,6 +12,7 @@ public class Player : NetworkBehaviour
 
     [Header("HP")]
     private int hp = 3;
+    public int gold = 0;
 
     public override void OnStartLocalPlayer()
     {
