@@ -12,8 +12,8 @@ public class Builder : MonoBehaviour
         public bool Passable;
     }
 
-
     public GameObject FloorPrefab;
+    public GameObject GoalChestPrefab;
     public List<SyncPrefab> Prefabs;
 
     private WorldData world; //referencje to main world data, set in Init by GameManager
