@@ -27,7 +27,7 @@ public class SpitFire : MonoBehaviour
 
     private void Run()
     {
-        var obj = Instantiate<GameObject>(fireball, this.transform.position + this.transform.forward, Quaternion.identity);
+        var obj = Instantiate<GameObject>(fireball, this.transform.position, Quaternion.identity);
         if(obj)
             childs.Add(obj);
     }
