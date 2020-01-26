@@ -10,19 +10,16 @@ public class Fly : MonoBehaviour
 
     private void Start()
     {
-        var arrowSplit = GetComponentInParent<ArrowSpit>();
+        direction = GetComponentInParent<ArrowSpit>().Direction;
 
-        if (arrowSplit)
+        switch (direction)
         {
-            switch (arrowSplit.Direction)
-            {
-                case 0:
-                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 90, transform.rotation.eulerAngles.z);
-                    break;
-                case 1:
-                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 90, transform.rotation.eulerAngles.z);
-                    break;
-            }
+            case 0:
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 90, transform.rotation.eulerAngles.z);
+                break;
+            case 1:
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 90, transform.rotation.eulerAngles.z);
+                break;
         }
     }
 
@@ -32,9 +29,9 @@ public class Fly : MonoBehaviour
         if (lifeTime <= 0f)
             Destroy(gameObject);
 
-        switch (direction)
+        switch (direction) 
         {
-            case 0:
+            case 0: 
                 transform.position += new Vector3(transform.forward.z, transform.forward.y, transform.forward.x) * speed * Time.deltaTime;
                 break;
             case 1:
@@ -47,6 +44,6 @@ public class Fly : MonoBehaviour
                 transform.position += new Vector3(transform.forward.z, transform.forward.y, transform.forward.x) * -1 * speed * Time.deltaTime;
                 break;
         }
-
+        
     }
 }
