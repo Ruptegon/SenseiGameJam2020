@@ -59,14 +59,33 @@ MonoBehaviour:
   FloorPrefab: {fileID: 2375636265650401729, guid: b369876636c203f47ad28eb72a0ca542,
     type: 3}
   Prefabs:
-  - {fileID: 6848715953603604316, guid: c9e2be06f108ea74fa1fee32fbb068ea, type: 3}
-  - {fileID: 2225840308246297749, guid: 24a09cdfd3646d141b2da6b8ec62d6bc, type: 3}
-  - {fileID: 286645277949960065, guid: 735394341092c3144939ea9bd86a6293, type: 3}
-  - {fileID: 2647134118650524726, guid: 51f415d0bf2429445b400e1c1d4e82f2, type: 3}
-  - {fileID: 2907876319323043025, guid: fbb7f28fbf087164182b0e753d01fcbb, type: 3}
-  - {fileID: 1905337515291299316, guid: 75fa3e9165d86634995edb3c647f0d77, type: 3}
-  - {fileID: 2650492376410142918, guid: 8f5734d50ce24974893d7fb9bd29deb0, type: 3}
-  - {fileID: 6017039799754317789, guid: 99ca260b1a7caf64096e8548644ee790, type: 3}
-  - {fileID: 5171546704560203505, guid: 5491f6a169e9d2646bf5ff2b772e6b62, type: 3}
-  - {fileID: 2801134197472157008, guid: b688621475dc4714ca1423a55b6894fa, type: 3}
+  - Prefab: {fileID: 6848715953603604316, guid: c9e2be06f108ea74fa1fee32fbb068ea,
+      type: 3}
+    Passable: 1
+  - Prefab: {fileID: 2225840308246297749, guid: 24a09cdfd3646d141b2da6b8ec62d6bc,
+      type: 3}
+    Passable: 1
+  - Prefab: {fileID: 286645277949960065, guid: 735394341092c3144939ea9bd86a6293, type: 3}
+    Passable: 0
+  - Prefab: {fileID: 2647134118650524726, guid: 51f415d0bf2429445b400e1c1d4e82f2,
+      type: 3}
+    Passable: 0
+  - Prefab: {fileID: 2907876319323043025, guid: fbb7f28fbf087164182b0e753d01fcbb,
+      type: 3}
+    Passable: 1
+  - Prefab: {fileID: 1905337515291299316, guid: 75fa3e9165d86634995edb3c647f0d77,
+      type: 3}
+    Passable: 0
+  - Prefab: {fileID: 2650492376410142918, guid: 8f5734d50ce24974893d7fb9bd29deb0,
+      type: 3}
+    Passable: 1
+  - Prefab: {fileID: 6017039799754317789, guid: 99ca260b1a7caf64096e8548644ee790,
+      type: 3}
+    Passable: 1
+  - Prefab: {fileID: 2801134197472157008, guid: b688621475dc4714ca1423a55b6894fa,
+      type: 3}
+    Passable: 0
+  - Prefab: {fileID: 5171546704560203505, guid: 5491f6a169e9d2646bf5ff2b772e6b62,
+      type: 3}
+    Passable: 1
   runtimeWorldAssets: []
