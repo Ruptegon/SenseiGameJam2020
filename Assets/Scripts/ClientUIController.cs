@@ -72,6 +72,6 @@ public class ClientUIController : MonoBehaviour
 
     public void OnGoalChestAchieved()
     {
-
+        //TODO: Kacper, ogarnij... jak dojdziemy do końca skrzyni.
     }
 }
