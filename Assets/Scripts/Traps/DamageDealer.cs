@@ -6,14 +6,10 @@ public class DamageDealer : MonoBehaviour
 {
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        try 
-        {
-            Player player = other.GetComponent<Player>();
-            player.Damage();
-        }
-        catch(System.Exception e)
-        {
-            //Debug.Log("Not a player.");
-        }
+        var player = other.GetComponent<Player>();
+        if (!player || !player.isLocalPlayer)
+            return;
+
+        player?.Damage();
     }
 }
