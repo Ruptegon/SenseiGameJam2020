@@ -24,6 +24,11 @@ public class DungeonKeeper : MonoBehaviour
         plane = new Plane(Vector3.up, Camera.main.transform.position.y);
     }
 
+    private void Start()
+    {
+        GameManager.Builder.OnWorldRebuild.AddListener(OnWorldRebuild);
+    }
+
     public void SetSelectedPrefab(GameObject prefab) => toSpawn = prefab;
 
     public void SetCostOfNext(int nextCost) => costOfNext = nextCost;
@@ -69,5 +74,11 @@ public class DungeonKeeper : MonoBehaviour
     void UpdateCost() 
     {
         textMesh.text = (points / pointsMax).ToString();
+    }
+
+    void OnWorldRebuild() 
+    {
+        points = pointsMax;
+        toSpawn = null;
     }
 }
