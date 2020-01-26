@@ -13,6 +13,7 @@ public class ServerUIController : MonoBehaviour
 
     public void ResetMatch()
     {
+        Debug.Log("playerWhoFinished.Clear()");
         playersWhoFinished.Clear();
     }
 
@@ -25,7 +26,7 @@ public class ServerUIController : MonoBehaviour
         }
 
         if (playersWhoFinished.Contains((player, true)) || playersWhoFinished.Contains((player, false)))
-            Debug.LogError("Something is wrong! Dictionary shoudn't contains this element");
+            return;
 
         playersWhoFinished.Add((player, wasAlive));
     }
