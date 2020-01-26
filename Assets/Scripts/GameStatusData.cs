@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class GameStatusData : MessageBase
 {
-    public enum GameStatus { none, BuildAndConnect, GameplayRun }
+    public enum GameStatus { BuildAndConnect, GameplayRun }
 
-    public GameStatus CurrentStatus = GameStatus.none;
+    public GameStatus CurrentStatus = GameStatus.BuildAndConnect;
 
 
     public override void Deserialize(NetworkReader reader)
