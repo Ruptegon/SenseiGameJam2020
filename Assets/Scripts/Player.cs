@@ -163,4 +163,13 @@ public class Player : NetworkBehaviour
             ClientUIController.Instance.OnRuningEnd();
         }
     }
+
+    private void Update()
+    {
+        if (GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
+        {
+            if (Instances.Count != 0 && Instances.Count == PlayersWhoFinished.Count)
+                GameManager.Instance.StartBuildAndConnectStage(3f);
+        }
+    }
 }

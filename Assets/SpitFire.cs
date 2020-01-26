@@ -6,7 +6,7 @@ public class SpitFire : MonoBehaviour
 {
     [SerializeField] GameObject fireball;
 
-    private List<GameObject> childs;
+    private List<GameObject> childs = new List<GameObject>();
 
     private int secondDelay = 4;
     int secondTimer;
@@ -28,11 +28,19 @@ public class SpitFire : MonoBehaviour
     private void Run()
     {
         var obj = Instantiate<GameObject>(fireball, this.transform.position + this.transform.forward, Quaternion.identity);
-        childs.Add(obj);
+        if(obj)
+            childs.Add(obj);
     }
 
     private void OnDestroy()
     {
-        childs.ForEach(x => Destroy(x.gameObject));
+        childs.ForEach(x => DestroyIfNotNull(x?.gameObject));
+        childs.Clear();
+    }
+
+    private void DestroyIfNotNull(GameObject obj)
+    {
+        if (obj)
+            Destroy(obj);
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -86,8 +87,10 @@ public class GameManager : MonoBehaviour
     }
 
     //Server
-    public void StartBuildAndConnectStage()
+    public async void StartBuildAndConnectStage(float delay = 0f)
     {
+        await Task.Delay(TimeSpan.FromSeconds(delay));
+
         if (GameStatus == GameStatusData.GameStatus.BuildAndConnect)
             return;
 

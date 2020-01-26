@@ -622,7 +622,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 79.15
+  m_fontSize: 79.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2917,7 +2917,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: -1
-  m_PreferredHeight: 720
+  m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: 100
   m_LayoutPriority: 1
@@ -2942,9 +2942,9 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 25, y: 40.79}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Spacing: {x: 25, y: 25}
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!1 &8600574889352228240
 GameObject:
   m_ObjectHideFlags: 0
