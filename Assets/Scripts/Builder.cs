@@ -18,7 +18,7 @@ public class Builder : MonoBehaviour
 
     private WorldData world; //referencje to main world data, set in Init by GameManager
 
-    public List<GameObject> runtimeWorldAssets = new List<GameObject>();
+    private List<GameObject> runtimeWorldAssets = new List<GameObject>();
 
     public void Init(WorldData worldData)
     {

@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 public class DungeonKeeper : MonoBehaviour
 {
+    public static DungeonKeeper Instance;
+
     private GameObject toSpawn;
     private Vector3 spawnLocation;
-    private Plane plane;
+    private Plane plane = new Plane(Vector3.up, Camera.main.transform.position.y);
 
-    [SerializeField] private Button batButton;
-
-    private void Start()
+    private void Awake()
     {
-        batButton.onClick.AddListener(ButtonBat);
-        plane = new Plane(Vector3.up, Camera.main.transform.position.y);
+        Instance = this;
     }
+
+    public void SetSelectedPrefab(GameObject prefab) => toSpawn = prefab;
 
     // Update is called once per frame
     void Update()
@@ -43,10 +44,4 @@ public class DungeonKeeper : MonoBehaviour
             }
         }
     }
-
-    private void ButtonBat() 
-    {
-        toSpawn = GameManager.Builder.Prefabs[0].Prefab;
-    }
-
 }
