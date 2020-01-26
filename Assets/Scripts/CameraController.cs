@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     float xPosition = 3;
     float yPosition = 9;
-    float movementSpeed = 5f;
+    float movementSpeed = 10f;
     float xRotation = 80f;
 
     private void Start()
