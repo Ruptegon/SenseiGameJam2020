@@ -24,7 +24,7 @@ public class DungeonKeeper : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            Debug.Log("Mouse down 2!");
+            //Debug.Log("Mouse down 2!");
 
             if (toSpawn != null)
             {
@@ -38,8 +38,8 @@ public class DungeonKeeper : MonoBehaviour
                     if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < 7 && worldPos.z < 30)
                     {
                         GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z);
-                        Debug.Log("Mouse pos = " + Input.mousePosition);
-                        Debug.Log("World pos = " + worldPos);
+                        //Debug.Log("Mouse pos = " + Input.mousePosition);
+                        //Debug.Log("World pos = " + worldPos);
                     }
                 }
             }
