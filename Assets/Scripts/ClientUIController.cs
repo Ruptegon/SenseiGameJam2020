@@ -61,28 +61,28 @@ public class ClientUIController : MonoBehaviour
             else if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
             {
                 waitingRoomCanvas.SetActive(false);
-                impossibleRunning = false;
             }
             else
             {
                 if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
                 {
                     waitingRoomCanvas.SetActive(true);
+                    waitingForFinishCanvas.SetActive(false);
+                    impossibleRunning = false;
                 }
-                if (!Player.LocalPlayer)
+                if (Player.LocalPlayer)
                 {
-                    return;
-                }
-                Gold.text = Player.LocalPlayer.Gold.ToString();
-                if (Player.LocalPlayer.HP < 3)
-                {
-                    heart1.enabled = false;
-                    if (Player.LocalPlayer.HP < 2)
+                    Gold.text = Player.LocalPlayer.Gold.ToString();
+                    if (Player.LocalPlayer.HP < 3)
                     {
-                        heart2.enabled = false;
-                        if (Player.LocalPlayer.HP < 1)
+                        heart1.enabled = false;
+                        if (Player.LocalPlayer.HP < 2)
                         {
-                            heart3.enabled = false;
+                            heart2.enabled = false;
+                            if (Player.LocalPlayer.HP < 1)
+                            {
+                                heart3.enabled = false;
+                            }
                         }
                     }
                 }

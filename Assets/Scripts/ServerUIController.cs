@@ -51,7 +51,7 @@ public class ServerUIController : MonoBehaviour
                 rightServerUI.PlayButton.GetComponentInChildren<TMP_Text>().text = "Start Match";
                 break;
             case GameStatusData.GameStatus.GameplayRun:
-                rightServerUI.PlayButton.GetComponentInChildren<TMP_Text>().text = "((Runing...))";
+                rightServerUI.PlayButton.GetComponentInChildren<TMP_Text>().text = "((Running...))";
                 break;
             default:
                 break;
