@@ -10,9 +10,9 @@ public class ClientUIController : MonoBehaviour
 
     public static ClientUIController Instance;
 
-    [SerializeField] public Button UpArrow; 
-    [SerializeField] public Button DownArrow; 
-    [SerializeField] public Button RightArrow; 
+    [SerializeField] public Button UpArrow;
+    [SerializeField] public Button DownArrow;
+    [SerializeField] public Button RightArrow;
     [SerializeField] public Button LeftArrow;
     [SerializeField] private TextMeshProUGUI Gold;
     [SerializeField] private RawImage heart1;
@@ -29,7 +29,7 @@ public class ClientUIController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
         gameObject.SetActive(Net.IsClient);
     }
 
@@ -45,6 +45,10 @@ public class ClientUIController : MonoBehaviour
         }
         else 
         {
+            if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+            {
+                waitingRoomCanvas.SetActive(true);
+            }
             if (!Player.LocalPlayer)
             {
                 return;
@@ -61,10 +65,6 @@ public class ClientUIController : MonoBehaviour
                         heart3.enabled = false;
                     }
                 }
-            }
-            if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect) 
-            {
-                waitingRoomCanvas.SetActive(true);
             }
         }
     }

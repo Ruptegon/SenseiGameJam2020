@@ -733,6 +733,7 @@ GameObject:
   - component: {fileID: 1251518208054090945}
   - component: {fileID: 9157540719496674590}
   - component: {fileID: 7075730243666664185}
+  - component: {fileID: 7389346285870700892}
   m_Layer: 0
   m_Name: Ranking
   m_TagString: Untagged
@@ -884,6 +885,19 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7389346285870700892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285338268353909434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df1221785b9700f4699d8ba410720e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scores: {fileID: 7075730243666664185}
 --- !u!1 &4351765581347277197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1559,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 7244541047573171737}
   m_TextComponent: {fileID: 2565642552676168366}
   m_materialReferenceIndex: 1
