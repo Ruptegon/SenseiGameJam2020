@@ -22,4 +22,13 @@ public class TurtlePatrol : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, rotationY.Evaluate(time), 0f);
         transform.position = startPosition + new Vector3(positionX.Evaluate(time), positionY.Evaluate(time), positionZ.Evaluate(time));
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var player = other.GetComponent<Player>();
+        if (!player || !player.isLocalPlayer)
+            return;
+
+        player?.Damage();
+    }
 }
