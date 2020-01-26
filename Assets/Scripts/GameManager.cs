@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         else if(GameStatus == GameStatusData.GameStatus.GameplayRun)
         {
             Player.LocalPlayer.ResetPlayer();
+            ServerUIController.instance.ResetMatch(); //TODO: To jest złe miejsce na takie rzeczy!
         }
         Debug.Log("GameStatus " + GameStatus);
     }

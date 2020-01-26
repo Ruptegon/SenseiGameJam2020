@@ -19,12 +19,6 @@ public class ServerUIController : MonoBehaviour
 
     public void AddPlayerWhoFinished(Player player, bool wasAlive)
     {
-        if(Net.IsClient)
-        {
-            Debug.LogWarning("Should be invoke only on server!");
-            return;
-        }
-
         if (playersWhoFinished.Contains((player, true)) || playersWhoFinished.Contains((player, false)))
             return;
 

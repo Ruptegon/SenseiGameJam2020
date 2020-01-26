@@ -42,6 +42,7 @@ public class ClientUIController : MonoBehaviour
     {
         if (onGoal && GameManager.GameStatus != GameStatusData.GameStatus.BuildAndConnect)
         {
+            waitingForFinishCanvas.SetActive(true);
             placement.text = "";
             var playersWhoFinished = ServerUIController.instance.playersWhoFinished;
             for (int i = 0; i < playersWhoFinished.Count; i++)
@@ -53,11 +54,11 @@ public class ClientUIController : MonoBehaviour
         }
         else
         {
-            if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+            if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
             {
                 return;
             }
-            else if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
+            else if (waitingRoomCanvas.activeSelf && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
             {
                 waitingRoomCanvas.SetActive(false);
             }
