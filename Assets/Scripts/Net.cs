@@ -32,7 +32,7 @@ public class Net : NetworkManager
 
     new private void Start()
     {
-        if(Net.IsServer)
+        if (Net.IsServer)
         {
             base.StartServer();
         }
@@ -44,6 +44,7 @@ public class Net : NetworkManager
         StartClient();
     }
 
+    //SERVER!
     public override void OnServerConnect(NetworkConnection conn)
     {
         if (!GameManager.Instance)
@@ -53,7 +54,16 @@ public class Net : NetworkManager
         }
         else
         {
-            GameManager.Instance.SendSyncToClient(conn);
+            if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect)
+            {
+                //Sprawn player!
+                GameManager.Instance.SendSyncToClient(conn);
+                Debug.Log($"Client {conn.address} joined to game!");
+            }
+            else
+            {
+                Debug.Log($"Client {conn.address} wanted join to game but was disconnected!");
+            }
         }
     }
 }
