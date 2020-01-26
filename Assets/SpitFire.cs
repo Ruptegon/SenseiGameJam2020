@@ -33,6 +33,13 @@ public class SpitFire : MonoBehaviour
 
     private void OnDestroy()
     {
-        childs.ForEach(x => Destroy(x.gameObject));
+        childs.ForEach(x => DestroyIfNotNull(x?.gameObject));
+        childs.Clear();
+    }
+
+    private void DestroyIfNotNull(GameObject obj)
+    {
+        if (obj)
+            Destroy(obj);
     }
 }
