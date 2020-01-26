@@ -13,6 +13,7 @@ public class PlayerMovement : NetworkBehaviour
     enum Rotation { Forward, Backward, Left, Right };
     private Rotation currentRotation = Rotation.Forward;
     private float movementTime = 0.2f;
+    private float animationMovementTime => movementTime * 0.8f;
     private bool isMoving = false;
 
     public override void OnStartLocalPlayer()
@@ -22,51 +23,19 @@ public class PlayerMovement : NetworkBehaviour
         {
             ClientUIController.Instance.UpArrow.onClick.AddListener(MoveForwardLocal);
             ClientUIController.Instance.DownArrow.onClick.AddListener(MoveBackwardLocal);
-            ClientUIController.Instance.LeftArrow.onClick.AddListener(MoveLeftLocal);
-            ClientUIController.Instance.RightArrow.onClick.AddListener(MoveRightLocal);
+            ClientUIController.Instance.LeftArrow.onClick.AddListener(LeftRotate);
+            ClientUIController.Instance.RightArrow.onClick.AddListener(RightRotate);
         }
     }
 
-    private void MoveRightLocal()
+    private void LeftRotate()
     {
-        switch (currentRotation)
-        {
-            case Rotation.Forward:
-                MoveRight();
-                break;
-            case Rotation.Backward:
-                MoveLeft();
-                break;
-            case Rotation.Left:
-                MoveForward();
-                break;
-            case Rotation.Right:
-                MoveBackward();
-                break;
-            default:
-                break;
-        }
+        throw new NotImplementedException();
     }
 
-    private void MoveLeftLocal()
+    private void RightRotate()
     {
-        switch (currentRotation)
-        {
-            case Rotation.Forward:
-                MoveLeft();
-                break;
-            case Rotation.Backward:
-                MoveRight();
-                break;
-            case Rotation.Left:
-                MoveForward();
-                break;
-            case Rotation.Right:
-                MoveBackward();
-                break;
-            default:
-                break;
-        }
+        throw new NotImplementedException();
     }
 
     private void MoveBackwardLocal()
@@ -127,8 +96,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition + 1, zPosition, (int)Rotation.Right);
-
+        CmdMoveTo(xPosition + 1, zPosition);
     }
 
     private void MoveLeft()
@@ -140,8 +108,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition - 1, zPosition, (int)Rotation.Left);
-
+        CmdMoveTo(xPosition - 1, zPosition);
     }
 
     private void MoveBackward()
@@ -153,8 +120,7 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition, zPosition - 1, (int)Rotation.Backward);
-
+        CmdMoveTo(xPosition, zPosition - 1);
     }
 
     private void MoveForward()
@@ -166,11 +132,30 @@ public class PlayerMovement : NetworkBehaviour
 
         var xPosition = (int)transform.position.x;
         var zPosition = (int)transform.position.z;
-        CmdMoveTo(xPosition, zPosition + 1, (int)Rotation.Forward);
-
+        CmdMoveTo(xPosition, zPosition + 1);
     }
 
-    private void MoveTo(int x, int z, int rotation)
+    private void MoveTo(int x, int z)
+    {
+        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
+        animator.speed = 1 / animationMovementTime;
+        animator.SetTrigger("Jump");
+    }
+
+    [Command]
+    private void CmdMoveTo(int x, int z)
+    {
+        MoveTo(x, z);
+        RpcMoveTo(x, z);
+    }
+
+    [ClientRpc]
+    private void RpcMoveTo(int x, int z)
+    {
+        MoveTo(x, z);
+    }
+
+    private void RotateTo(int rotation)
     {
         Vector3 GetRotation(Rotation rot)
         {
@@ -190,26 +175,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         currentRotation = (Rotation)rotation;
-        var animationMovementTime = movementTime * 0.8f;
-
-        iTween.MoveTo(gameObject, new Vector3(x, 0f, z), animationMovementTime);
         iTween.RotateTo(gameObject, GetRotation(currentRotation), animationMovementTime);
-        animator.speed = 1 / animationMovementTime;
-        animator.SetTrigger("Jump");
-
-    }
-
-    [Command]
-    private void CmdMoveTo(int x, int z, int rotation)
-    {
-        MoveTo(x, z, rotation);
-        RpcMoveTo(x, z, rotation);
-    }
-
-    [ClientRpc]
-    private void RpcMoveTo(int x, int z, int rotation)
-    {
-        MoveTo(x, z, rotation);
     }
 }
 
