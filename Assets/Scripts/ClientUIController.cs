@@ -15,11 +15,13 @@ public class ClientUIController : MonoBehaviour
     [SerializeField] public Button RightArrow; 
     [SerializeField] public Button LeftArrow;
     [SerializeField] private TextMeshProUGUI Gold;
-    [SerializeField] private TextMeshProUGUI Ranking;
     [SerializeField] private RawImage heart1;
     [SerializeField] private RawImage heart2;
     [SerializeField] private RawImage heart3;
 
+    [SerializeField] private GameObject waitingRoomCanvas;
+
+    [SerializeField] private TextMeshProUGUI ranking;
 
     public static float HorizontalInput;
     public static float VertiaclInput;
@@ -33,21 +35,36 @@ public class ClientUIController : MonoBehaviour
 
     private void Update()
     {
-        if (!Player.LocalPlayer)
+        if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect) 
         {
             return;
         }
-        Gold.text = Player.LocalPlayer.Gold.ToString();
-        if (Player.LocalPlayer.HP < 3) 
+        else if (waitingRoomCanvas && GameManager.GameStatus == GameStatusData.GameStatus.GameplayRun)
         {
-            heart1.enabled = false;
-            if (Player.LocalPlayer.HP < 2)
+            waitingRoomCanvas.SetActive(false);
+        }
+        else 
+        {
+            if (!Player.LocalPlayer)
             {
-                heart2.enabled = false;
-                if (Player.LocalPlayer.HP < 1)
+                return;
+            }
+            Gold.text = Player.LocalPlayer.Gold.ToString();
+            if (Player.LocalPlayer.HP < 3) 
+            {
+                heart1.enabled = false;
+                if (Player.LocalPlayer.HP < 2)
                 {
-                    heart3.enabled = false;
+                    heart2.enabled = false;
+                    if (Player.LocalPlayer.HP < 1)
+                    {
+                        heart3.enabled = false;
+                    }
                 }
+            }
+            if (GameManager.GameStatus == GameStatusData.GameStatus.BuildAndConnect) 
+            {
+                waitingRoomCanvas.SetActive(true);
             }
         }
     }
