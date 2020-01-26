@@ -19,7 +19,7 @@ public class ChestScore
     public int GetClientScore()
     {
         visitors++;
-        var score = (int)(voult / 2f);
+        var score = Mathf.CeilToInt(voult / 2f);
         voult -= score;
         return score;
     }

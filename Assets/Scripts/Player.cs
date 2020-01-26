@@ -148,7 +148,8 @@ public class Player : NetworkBehaviour
     void CmdSendEndCommunicat(bool isAlive)
     {
         AddPlayerWhoFinished(this, isAlive);
-        Score += GameManager.GoalChest.GetClientScore();
+        if(isAlive)
+            Score += GameManager.GoalChest.GetClientScore();
     }
 
     private void OnTriggerEnter(Collider other)
