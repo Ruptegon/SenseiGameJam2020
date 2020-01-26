@@ -104,6 +104,13 @@ public class Player : NetworkBehaviour
     public void Heal() => HP++;
     public void Kill() => HP = 0;
 
+    private PlayerMovement movement;
+
+    private void Awake()
+    {
+        movement = GetComponent<PlayerMovement>();
+    }
+
     private void Start()
     {
         ResetPlayer();
@@ -132,6 +139,8 @@ public class Player : NetworkBehaviour
     {
         var xPosition = (int)(GameManager.World.SizeX / 2f);
         transform.position = new Vector3(xPosition, 0f, 0f);
+        transform.rotation = Quaternion.identity;
+        movement.ResetPlayer();
         HP = 3;
     }
 

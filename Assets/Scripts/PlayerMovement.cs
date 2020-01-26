@@ -16,6 +16,11 @@ public class PlayerMovement : NetworkBehaviour
     private float animationMovementTime => movementTime * 0.8f;
     private bool isMoving = false;
 
+    public void ResetPlayer()
+    {
+        currentRotation = Rotation.Forward;
+    }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
