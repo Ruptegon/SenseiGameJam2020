@@ -7,6 +7,7 @@ public class ShopButton : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] Texture image;
+    [SerializeField] int cost;
 
     Button button;
 

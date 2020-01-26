@@ -58,6 +58,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 2375636265650401729, guid: b369876636c203f47ad28eb72a0ca542,
     type: 3}
+  GoalChestPrefab: {fileID: 1760444925656347816, guid: 1f1e086b7938c944faa2d403cb840e1e,
+    type: 3}
   Prefabs:
   - Prefab: {fileID: 6848715953603604316, guid: c9e2be06f108ea74fa1fee32fbb068ea,
       type: 3}
@@ -88,4 +90,3 @@ MonoBehaviour:
   - Prefab: {fileID: 5171546704560203505, guid: 5491f6a169e9d2646bf5ff2b772e6b62,
       type: 3}
     Passable: 1
-  runtimeWorldAssets: []
