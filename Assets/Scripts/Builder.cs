@@ -11,6 +11,7 @@ public class Builder : MonoBehaviour
     {
         public GameObject Prefab;
         public bool Passable;
+        public bool Deadly;
     }
 
     public GameObject FloorPrefab;
@@ -91,7 +92,8 @@ public class Builder : MonoBehaviour
         runtimeWorldAssets.Add(Instantiate(prefab, new Vector3(positionX, 0, positionZ), Quaternion.identity, transform));
         var prefabId = GetPrefabId(prefab);
         var passable = Prefabs[prefabId].Passable;
-        world.AddObject(prefabId, passable, positionX, positionZ);
+        var deadly = Prefabs[prefabId].Deadly;
+        world.AddObject(prefabId, passable, deadly, positionX, positionZ);
         return true;
     }
 

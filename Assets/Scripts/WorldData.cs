@@ -1,4 +1,4 @@
-﻿using Mirror;
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ public class WorldData : MessageBase
 
     public int[,] Map;
     public bool[,] MapPassable; //not synced
+    public bool[,] MapDeadly; //not synced
 
     public WorldData()
     {
@@ -26,6 +27,7 @@ public class WorldData : MessageBase
         SizeZ = sizeZ;
         Map = new int[SizeX, SizeZ];
         MapPassable = new bool[SizeX, SizeZ];
+        MapDeadly = new bool[SizeX, SizeZ];
 
         for (int x = 0; x < SizeX; x++)
         {
@@ -33,6 +35,7 @@ public class WorldData : MessageBase
             {
                 Map[x, z] = -1;
                 MapPassable[x, z] = true;
+                MapDeadly[x, z] = true;
             }
         }
     }
@@ -45,6 +48,7 @@ public class WorldData : MessageBase
             {
                 Map[x, z] = -1;
                 MapPassable[x, z] = true;
+                MapDeadly[x, z] = true;
             }
         }
     }
@@ -110,13 +114,14 @@ public class WorldData : MessageBase
         GameManager.Instance.BuildWorld();
     }
 
-    public bool AddObject(int prefabId, bool Passable, int positionX, int positionZ)
+    public bool AddObject(int prefabId, bool Passable, bool deadly, int positionX, int positionZ)
     {
         if (Map[positionX, positionZ] != -1)
             return false;
 
         Map[positionX, positionZ] = prefabId;
         MapPassable[positionX, positionZ] = Passable;
+        MapDeadly[positionX, positionZ] = deadly;
         return true;
     }
 
