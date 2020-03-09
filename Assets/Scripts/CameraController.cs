@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     float movementSpeed = 10f;
     float xRotation = 80f;
 
+    bool xMovement = true;
+
     private void Start()
     {
         transform.position = new Vector3(xPosition, yPosition, transform.position.z);
@@ -36,6 +38,19 @@ public class CameraController : MonoBehaviour
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 transform.position = new Vector3(xPosition, yPosition, transform.position.z - movementSpeed * Time.deltaTime);
+            }
+
+            if (xMovement)
+            {
+                xPosition = transform.position.x;
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.position = new Vector3(xPosition + movementSpeed * Time.deltaTime, yPosition, transform.position.z);
+                }
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    transform.position = new Vector3(xPosition - movementSpeed * Time.deltaTime, yPosition, transform.position.z);
+                }
             }
         }
 
