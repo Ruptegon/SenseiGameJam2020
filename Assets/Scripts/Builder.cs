@@ -61,17 +61,23 @@ public class Builder : MonoBehaviour
             Destroy(runtimeWorldAssets[i].GameObject);
         }
         runtimeWorldAssets.Clear();
-/*
+        /*
+                Debug.Log("Building floor...");
+                for (int x = 0; x < data.SizeX; x++)
+                {
+                    for (int z = 0; z < data.SizeZ; z++)
+                    {
+                        var istance = Instantiate(FloorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity, transform);
+                        runtimeWorldAssets.Add(new WorldObject(istance, data.SizeX, data.SizeZ));
+                    }
+                }
+        */
         Debug.Log("Building floor...");
         for (int x = 0; x < data.SizeX; x++)
         {
-            for (int z = 0; z < data.SizeZ; z++)
-            {
-                var istance = Instantiate(FloorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity, transform);
-                runtimeWorldAssets.Add(new WorldObject(istance, data.SizeX, data.SizeZ));
-            }
+            BuildObject(FloorPrefab, x, 0);
         }
-*/
+
         Debug.Log($"Building objects...");
         for (int x = 0; x < world.SizeX; x++)
         {
