@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class Builder : MonoBehaviour
 {
@@ -22,7 +23,23 @@ public class Builder : MonoBehaviour
 
     private WorldData world; //referencje to main world data, set in Init by GameManager
 
-    private List<GameObject> runtimeWorldAssets = new List<GameObject>();
+    class WorldObject
+    {
+        public GameObject GameObject;
+        public float PositionX;
+        public float PositionZ;
+
+        public WorldObject(GameObject gameObject, float positonX, float positionZ)
+        {
+            GameObject = gameObject;
+            PositionX = positonX;
+            PositionZ = positionZ;
+        }
+
+    }
+
+
+    private List<WorldObject> runtimeWorldAssets = new List<WorldObject>();
 
     public void Init(WorldData worldData)
     {
@@ -41,7 +58,7 @@ public class Builder : MonoBehaviour
         Debug.Log("Clearing world...");
         for (int i = 0; i < runtimeWorldAssets.Count; i++)
         {
-            Destroy(runtimeWorldAssets[i]);
+            Destroy(runtimeWorldAssets[i].GameObject);
         }
         runtimeWorldAssets.Clear();
 
@@ -50,7 +67,8 @@ public class Builder : MonoBehaviour
         {
             for (int z = 0; z < data.SizeZ; z++)
             {
-                runtimeWorldAssets.Add(Instantiate(FloorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity, transform));
+                var istance = Instantiate(FloorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity, transform);
+                runtimeWorldAssets.Add(new WorldObject(istance, data.SizeX, data.SizeZ));
             }
         }
 
@@ -70,7 +88,8 @@ public class Builder : MonoBehaviour
 
         Debug.Log($"Building goal chest...");
         var xGoalChestPosition = (int)(GameManager.World.SizeX / 2f);
-        runtimeWorldAssets.Add(Instantiate(GoalChestPrefab, new Vector3(xGoalChestPosition, 0f, world.SizeZ), Quaternion.identity, transform));
+        var instance = Instantiate(GoalChestPrefab, new Vector3(xGoalChestPosition, 0f, world.SizeZ), Quaternion.identity, transform);
+        runtimeWorldAssets.Add(new WorldObject(instance, xGoalChestPosition, world.SizeZ));
     }
 
     private void InstantiateObject(int prefabId, int positionX, int positionZ)
@@ -80,21 +99,36 @@ public class Builder : MonoBehaviour
             return;
 
 
-
-        runtimeWorldAssets.Add(Instantiate(Prefabs[prefabId].Prefab, new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform));
+        var instance = Instantiate(Prefabs[prefabId].Prefab, new Vector3(positionX, 0f, positionZ), Quaternion.identity, transform);
+        runtimeWorldAssets.Add(new WorldObject(instance, positionX, positionZ));
     }
 
     public bool BuildObject(GameObject prefab, int positionX, int positionZ)
     {
         if (!world.IsEmpty(positionX, positionZ))
-            return false;
+        {
+            RemoveObject(positionX, positionZ);
+        }
 
-        runtimeWorldAssets.Add(Instantiate(prefab, new Vector3(positionX, 0, positionZ), Quaternion.identity, transform));
+        var instance = Instantiate(prefab, new Vector3(positionX, 0, positionZ), Quaternion.identity, transform);
+        runtimeWorldAssets.Add(new WorldObject(instance, positionX, positionZ));
         var prefabId = GetPrefabId(prefab);
         var passable = Prefabs[prefabId].Passable;
         var deadly = Prefabs[prefabId].Deadly;
         world.AddObject(prefabId, passable, deadly, positionX, positionZ);
         return true;
+    }
+
+    public bool RemoveObject(int positionX, int positionZ)
+    {
+        var worldObject = runtimeWorldAssets.FirstOrDefault(x => x.PositionX == positionX && x.PositionZ == positionZ);
+        if(worldObject != null && runtimeWorldAssets.Remove(worldObject))
+        {
+            world.ResetFiled(positionX, positionZ);
+            Destroy(worldObject.GameObject);
+        }
+
+        return false;
     }
 
     public int GetPrefabId(GameObject prefab)

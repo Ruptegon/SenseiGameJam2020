@@ -1,4 +1,4 @@
-using Mirror;
+﻿using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -112,6 +112,13 @@ public class WorldData : MessageBase
 
         Debug.Log($"World [{SizeX}:{SizeZ}]");
         GameManager.Instance.BuildWorld();
+    }
+
+    public void ResetFiled(int positionX, int positionZ)
+    {
+        Map[positionX, positionZ] = -1;
+        MapPassable[positionX, positionZ] = false;
+        MapDeadly[positionX, positionZ] = true;
     }
 
     public bool AddObject(int prefabId, bool Passable, bool deadly, int positionX, int positionZ)

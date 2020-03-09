@@ -37,47 +37,36 @@ public class DungeonKeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-            //Debug.Log("Mouse down 2!");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float enter = 0.0f;
 
-            if (toSpawn != null)
+            if (plane.Raycast(ray, out enter))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                float enter = 0.0f;
-
-                if (plane.Raycast(ray, out enter))
+                Vector3 worldPos = ray.GetPoint(enter);
+                worldPos += new Vector3(0.5f, 0.5f, 0.5f);
+                if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < 7 && worldPos.z < 30)
                 {
-                    Vector3 worldPos = ray.GetPoint(enter);
-                    worldPos += new Vector3(0.5f, 0.5f, 0.5f);
-                    if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < 7 && worldPos.z < 30)
+                    if (toSpawn != null)
                     {
-                        if (points + costOfNext < pointsMax)
-                        {
-                            if (GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z))
-                            {
-                                points += costOfNext;
-                                UpdateCost();
-                            }
-                        }
-                        else 
-                        {
-                            //Place message here.
-                        }
-                        //Debug.Log("Mouse pos = " + Input.mousePosition);
-                        //Debug.Log("World pos = " + worldPos);
+                        GameManager.Builder.BuildObject(toSpawn, (int)worldPos.x, (int)worldPos.z);
+                    }
+                    else
+                    {
+                        GameManager.Builder.RemoveObject((int)worldPos.x, (int)worldPos.z);
                     }
                 }
             }
         }
     }
 
-    void UpdateCost() 
+    void UpdateCost()
     {
         textMesh.text = $"{points}/{pointsMax}";
     }
 
-    void OnWorldRebuild() 
+    void OnWorldRebuild()
     {
         points = 0;
         toSpawn = null;
