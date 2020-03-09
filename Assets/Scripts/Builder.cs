@@ -61,7 +61,7 @@ public class Builder : MonoBehaviour
             Destroy(runtimeWorldAssets[i].GameObject);
         }
         runtimeWorldAssets.Clear();
-
+/*
         Debug.Log("Building floor...");
         for (int x = 0; x < data.SizeX; x++)
         {
@@ -71,7 +71,7 @@ public class Builder : MonoBehaviour
                 runtimeWorldAssets.Add(new WorldObject(istance, data.SizeX, data.SizeZ));
             }
         }
-
+*/
         Debug.Log($"Building objects...");
         for (int x = 0; x < world.SizeX; x++)
         {

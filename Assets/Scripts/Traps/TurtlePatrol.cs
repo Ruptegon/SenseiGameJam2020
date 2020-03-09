@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurtlePatrol : MonoBehaviour
 {
+    [SerializeField] Transform character;
+
     [SerializeField] AnimationCurve positionX;
     [SerializeField] AnimationCurve positionY;
     [SerializeField] AnimationCurve positionZ;
@@ -11,16 +13,11 @@ public class TurtlePatrol : MonoBehaviour
 
     Vector3 startPosition;
 
-    private void Start()
-    {
-        startPosition = transform.position;
-    }
-
     void Update()
     {
         var time = GameManager.SyncTimer;
-        transform.rotation = Quaternion.Euler(0f, rotationY.Evaluate(time), 0f);
-        transform.position = startPosition + new Vector3(positionX.Evaluate(time), positionY.Evaluate(time), positionZ.Evaluate(time));
+        character.rotation = Quaternion.Euler(0f, rotationY.Evaluate(time), 0f);
+        character.localPosition = new Vector3(positionX.Evaluate(time), positionY.Evaluate(time), positionZ.Evaluate(time));
     }
 
     private void OnTriggerEnter(Collider other)
