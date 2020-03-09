@@ -9,8 +9,6 @@ public class CameraController : MonoBehaviour
     float movementSpeed = 10f;
     float xRotation = 80f;
 
-    bool xMovement = true;
-
     private void Start()
     {
         transform.position = new Vector3(xPosition, yPosition, transform.position.z);
@@ -40,7 +38,7 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector3(xPosition, yPosition, transform.position.z - movementSpeed * Time.deltaTime);
             }
 
-            if (xMovement)
+            if (GameManager.CameraXMovement)
             {
                 xPosition = transform.position.x;
                 if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))

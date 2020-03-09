@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     public static GameStatusData.GameStatus GameStatus => Instance.gameStatus.CurrentStatus;
     public static ChestScore GoalChest = new ChestScore();
 
-    private WorldData worldData = new WorldData(7, 30);
+    private WorldData worldData = new WorldData(7, 10);
     private SyncTimer syncTimer = new SyncTimer();
     private GameStatusData gameStatus = new GameStatusData();
+
+    public static bool CameraXMovement = false;
 
     private void Awake()
     {
