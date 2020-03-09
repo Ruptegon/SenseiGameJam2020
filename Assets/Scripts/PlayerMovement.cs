@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private Player player;
 
     enum Rotation { Forward, Backward, Left, Right };
     private Rotation currentRotation = Rotation.Forward;
@@ -17,9 +18,19 @@ public class PlayerMovement : NetworkBehaviour
     private float animationMovementTime = 0.3f;
     private bool isMoving = false;
 
-    public void ResetPlayer()
+    [Command]
+    public void CmdResetPlayer()
     {
-        currentRotation = Rotation.Forward;
+        var xPosition = (int)(GameManager.World.SizeX / 2f);
+        MoveTo(xPosition, 0);
+        RpcMoveTo(xPosition, 0);
+        RotateTo((int)Rotation.Forward);
+        RpcRotateTo((int)Rotation.Forward);
+    }
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
     }
 
     public override void OnStartLocalPlayer()
@@ -180,9 +191,23 @@ public class PlayerMovement : NetworkBehaviour
         animator.SetTrigger("Jump");
     }
 
+    async void KillAfter(float time)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(time));
+        player.Kill();
+    }
+
     [Command]
     private void CmdMoveTo(int x, int z)
     {
+        if (GameManager.World.IsDeadly(x, z))
+        {
+            MoveTo(x, z);
+            RpcMoveTo(x, z);
+            KillAfter(1f);
+            return;
+        }
+
         if (!GameManager.World.IsPassable(x, z))
             return;
 

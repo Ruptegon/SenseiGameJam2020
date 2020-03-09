@@ -46,7 +46,7 @@ public class DungeonKeeper : MonoBehaviour
             {
                 Vector3 worldPos = ray.GetPoint(enter);
                 worldPos += new Vector3(0.5f, 0.5f, 0.5f);
-                if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < 7 && worldPos.z < 30)
+                if (worldPos.x >= 0 && worldPos.z >= 0 && worldPos.x < GameManager.World.SizeX && worldPos.z < GameManager.World.SizeZ)
                 {
                     if (toSpawn != null)
                     {

@@ -153,4 +153,18 @@ public class WorldData : MessageBase
 
         return MapPassable[positionX, positionZ];
     }
+
+    public bool IsDeadly(int positionX, int positionZ)
+    {
+        if (positionX < 0 || positionZ < 0)
+            return true;
+
+        if (positionX >= SizeX)
+            return true;
+
+        if (positionZ >= SizeZ)
+            return true;
+
+        return MapPassable[positionX, positionZ];
+    }
 }

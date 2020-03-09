@@ -118,11 +118,18 @@ public class Player : NetworkBehaviour
 
     public void OnDeath()
     {
+        if(isLocalPlayer)
+        {
+            ResetPlayer();
+        }
+
+        /*
         if (isLocalPlayer)
             CmdSendEndCommunicat(false);
 
         AddPlayerWhoFinished(this, false);
         ClientUIController.Instance.OnRuningEnd();
+        */
     }
 
     private void OnEnable()
@@ -140,7 +147,7 @@ public class Player : NetworkBehaviour
         var xPosition = (int)(GameManager.World.SizeX / 2f);
         transform.position = new Vector3(xPosition, 0f, 0f);
         transform.rotation = Quaternion.identity;
-        movement.ResetPlayer();
+        movement.CmdResetPlayer();
         HP = 3;
     }
 
